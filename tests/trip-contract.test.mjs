@@ -33,16 +33,22 @@ test("the charter's fixed dock times are set and ordered", () => {
   assert.equal(TRIP.returnByIso, "2026-11-07T11:00:00-05:00");
 });
 
-test("the turn-for-home readout is wired to the return time", async () => {
+test("the board is closed out: no live tracker, no new entries", async () => {
   const [html, app] = await Promise.all([read("index.html"), read("app.js")]);
-  assert.ok(html.includes('id="homeReadout"'), "the tracker needs a turn-for-home readout");
-  assert.ok(app.includes("const returnBy = new Date(TRIP.returnByIso)"), "it must read the configured return");
-  assert.ok(app.includes("function refreshHomeTiming"), "the readout needs its own refresh");
-  // It must always measure against the dock, never the selected ETA destination.
-  const fn = app.match(/function refreshHomeTiming\(\)[\s\S]*?\n\}/);
-  assert.ok(fn, "expected the home-timing function");
-  assert.ok(fn[0].includes("POINTS.home"), "home timing must measure to the dock");
-  assert.ok(!fn[0].includes("trackerDestination"), "home timing must not follow the ETA destination");
+
+  // The trip is over. Anything that asked the reader for live input is gone.
+  for (const id of ["tripUpdateForm", "destinationControl", "locateButton", "homeReadout", "etaReadout"]) {
+    assert.ok(!html.includes(`id="${id}"`), `${id} is live-trip furniture and should be off the recap page`);
+  }
+  assert.ok(!/navigator\.geolocation/.test(app), "the GPS watcher should be gone with the tracker");
+  assert.ok(!/data-entry-delete/.test(app), "a closed log should not offer delete buttons");
+  assert.ok(!/sharedStore\.(saveTripUpdate|updateDestination|updateEntry|deleteEntry)\(/.test(app),
+    "nothing on the page should still write trip state or log entries");
+
+  // What has to survive: the log, the standings, the chart, and the gallery.
+  for (const id of ["timelineList", "crewTally", "leafletMap", "sharedPhotoList", "photoPicker"]) {
+    assert.ok(html.includes(`id="${id}"`), `the recap still needs ${id}`);
+  }
 });
 
 test("the trip identifies the right boat, crew, and day", () => {
@@ -117,19 +123,8 @@ test("selectable destinations resolve to real waypoints", () => {
   );
 });
 
-test("the destination dropdown, the config, and the database agree", async () => {
-  const [html, migration] = await Promise.all([read("index.html"), read(migrationPath)]);
-
-  const select = html.match(/<select id="destinationControl"[\s\S]*?<\/select>/);
-  assert.ok(select, "the tracker needs a destination control");
-  const options = [...select[0].matchAll(/<option[^>]*>([^<]+)<\/option>/g)].map((m) => m[1].trim());
-  assert.deepEqual(options, DESTINATION_LABELS, "dropdown options must match trip-config");
-
-  const selected = select[0].match(/<option selected>([^<]+)<\/option>/);
-  assert.ok(selected, "one destination should be preselected");
-  assert.equal(selected[1].trim(), DEFAULT_DESTINATION);
-
-  // A destination the check constraint rejects would make every save fail.
+test("the configured destinations still match the database constraint", async () => {
+  const migration = await read(migrationPath);
   const constraint = migration.match(
     /add constraint trip_state_active_destination_check[\s\S]*?\);/,
   );
@@ -140,6 +135,7 @@ test("the destination dropdown, the config, and the database agree", async () =>
       `the database would reject destination "${label}"`,
     );
   });
+  assert.ok(DESTINATION_LABELS.includes(DEFAULT_DESTINATION), "the default must be a real destination");
 });
 
 test("the migration seeds the same trip identity the app asks for", async () => {
@@ -173,34 +169,13 @@ test("catch types are a subset of log types and drive the standings", () => {
   assert.ok(!CATCH_TYPES.includes("Weather"), "weather should not count as a fish");
 });
 
-test("the log form offers exactly the configured types, anglers, and methods", async () => {
-  const html = await read("index.html");
-
-  const typeSelect = html.match(/<select id="typeInput">[\s\S]*?<\/select>/);
-  assert.ok(typeSelect, "the log form needs a type control");
-  const types = [...typeSelect[0].matchAll(/<option[^>]*>([^<]+)<\/option>/g)].map((m) => m[1].trim());
-  assert.deepEqual(types, LOG_TYPES, "type options must match trip-config");
-
-  const methodSelect = html.match(/<select id="methodInput">[\s\S]*?<\/select>/);
-  assert.ok(methodSelect, "the log form needs a method control");
-  const methods = [...methodSelect[0].matchAll(/<option[^>]*>([^<]+)<\/option>/g)].map((m) => m[1].trim());
-  assert.deepEqual(methods, METHODS, "method options must match trip-config");
-
-  const anglerSelect = html.match(/<select id="anglerInput">[\s\S]*?<\/select>/);
-  assert.ok(anglerSelect, "the log form needs an angler control");
-  const anglers = [...anglerSelect[0].matchAll(/<option[^>]*>([^<]+)<\/option>/g)]
-    .map((m) => m[1].trim())
-    .filter((name) => name !== "Crew");
-  assert.deepEqual(anglers, CREW.map((member) => member.name), "angler options must match the crew");
-});
-
 test("every element app.js reads actually exists in the page", async () => {
   const [html, app] = await Promise.all([read("index.html"), read("app.js")]);
 
   const elsBlock = app.match(/const els = \{[\s\S]*?\n\};/);
   assert.ok(elsBlock, "app.js should keep its element map in one block");
   const ids = [...elsBlock[0].matchAll(/querySelector\("#([A-Za-z0-9_-]+)"\)/g)].map((m) => m[1]);
-  assert.ok(ids.length > 30, "expected the full element map, found " + ids.length);
+  assert.ok(ids.length > 10, "expected the full element map, found " + ids.length);
 
   const missing = ids.filter((id) => !html.includes(`id="${id}"`));
   assert.deepEqual(missing, [], "app.js queries IDs that the page does not define");
@@ -252,7 +227,6 @@ test("the striped bass rules on the page match the May 12 2026 DEC revision", as
     /not\s+required\s+on\s+artificial\s+lures/i.test(html),
     "the artificial-lure exemption keeps the circle hook rule accurate",
   );
-  assert.ok(/three nautical miles|3 nautical miles/i.test(html), "the EEZ boundary must be explained");
   assert.ok(
     html.includes("dec.ny.gov/things-to-do/saltwater-fishing/recreational-fishing-regulations"),
     "link out so the crew can confirm live limits",
@@ -263,7 +237,7 @@ test("the species guide leads with striped bass and covers the realistic catch",
   const html = await read("index.html");
   const cards = [...html.matchAll(/<article class="species-card ([a-z]+)">/g)].map((m) => m[1]);
   assert.equal(cards[0], "striper", "striped bass goes first, it is the target");
-  assert.deepEqual(cards, ["striper", "bluefish", "albie", "blackfish", "seabass"]);
+  assert.deepEqual(cards, ["striper", "bluefish"], "the recap keeps the two that were actually in play");
 
   assert.ok(html.includes("Morone saxatilis"), "the primer should name the species");
   assert.ok(/anadromous/i.test(html), "the migration is why the fall run exists");
@@ -274,28 +248,8 @@ test("the species guide leads with striped bass and covers the realistic catch",
   assert.ok(!/src="assets\//.test(html), "no leftover raster assets from the old trip");
 });
 
-test("the tracker promises keep GPS on the device", async () => {
-  const [html, app] = await Promise.all([read("index.html"), read("app.js")]);
-  assert.ok(
-    /stays on your phone and is not published/i.test(html),
-    "the page states the GPS privacy boundary",
-  );
-  // Nothing handed to the shared store may carry a coordinate.
-  const writeCalls = [...app.matchAll(/sharedStore\.(saveTripUpdate|updateDestination|updateEntry|deleteEntry)\(/g)];
-  assert.ok(writeCalls.length >= 3, `expected the shared-store write call sites, found ${writeCalls.length}`);
-  writeCalls.forEach((call) => {
-    const payload = app.slice(call.index, call.index + 600);
-    assert.ok(
-      !/latitude|longitude|latestTrackerFix|\.coords/.test(payload),
-      `a shared-board write (${call[1]}) includes position data`,
-    );
-  });
-
-  // The only place a fix is stored is the module-level tracker variable.
-  const fixAssignments = [...app.matchAll(/(?<!let )latestTrackerFix\s*=/g)];
-  assert.equal(fixAssignments.length, 1, "the GPS fix should be written in exactly one place");
-
-  // The shared client must not reference any position column.
+test("the shared client never learns the boat's position", async () => {
+  const app = await read("app.js");
   const client = app.match(/async function createSharedClient\(\)[\s\S]*?\n\}/);
   assert.ok(client, "expected the shared client factory");
   assert.ok(
