@@ -336,7 +336,7 @@ function refreshHomeTiming() {
 
   const returnLabel = formatClockTime(returnBy);
   if (!latestTrackerFix) {
-    els.homeReadout.textContent = `Start live location to see the latest turn for a ${returnLabel} return.`;
+    els.homeReadout.textContent = `Start live location to see the latest turn for a return by ${returnLabel}.`;
     return;
   }
 
@@ -354,7 +354,7 @@ function refreshHomeTiming() {
   const run = `${homeNm.toFixed(1)} nm home, ~${Math.round(minutesHome)} min ${basis}.`;
 
   if (slackMinutes <= 0) {
-    els.homeReadout.textContent = `${run} Past the turn for a ${returnLabel} return.`;
+    els.homeReadout.textContent = `${run} Past the turn for a return by ${returnLabel}.`;
     els.homeReadout.dataset.state = "late";
     return;
   }
@@ -363,7 +363,7 @@ function refreshHomeTiming() {
   const mins = slackMinutes % 60;
   const slack = hours ? `${hours}h ${String(mins).padStart(2, "0")}m` : `${mins}m`;
   els.homeReadout.textContent =
-    `${run} Turn by ${formatClockTime(turnBy)} for a ${returnLabel} return, ${slack} of fishing left.`;
+    `${run} Turn by ${formatClockTime(turnBy)} to be back by ${returnLabel}, ${slack} of fishing left.`;
   els.homeReadout.dataset.state = slackMinutes <= 30 ? "soon" : "ok";
 }
 
@@ -1335,6 +1335,8 @@ function runStartupTask(name, task) {
 
 runStartupTask("timer", renderTimer);
 runStartupTask("timeline", renderTimeline);
+// Give both tracker readouts their real pre-fix guidance instead of the markup default.
+runStartupTask("tracker readouts", refreshTrackerEta);
 runStartupTask("shared board", setupSharedBoard);
 runStartupTask("weather", refreshWeather);
 runStartupTask("buoy", refreshBuoy);
