@@ -111,12 +111,15 @@ export const POINTS = {
     label: "Long Beach",
     note: "Second stop and the westernmost point of the day, about 8:20 AM. Rods down 20 to 30 minutes with no hits, but the bunker were thick: five or six snagged live, three put in the water. Only dogfish bites. Turned east at 8:52.",
   },
-  outsideDemocratPoint: {
-    key: "outsideDemocratPoint",
-    lat: 40.6225,
-    lon: -73.295,
-    label: "Outside Democrat Point",
-    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. Then it broke wide open: the boat pulled the same line over and over on trolled spoons and had nine bass aboard by 11:45, with every man on the board. Three of the nine were inside the slot and went in the box; the other six were too big to keep. Lines in at 11:55 and headed home.",
+  // Final stop of the day and the only one that produced. Will marked it on the
+  // chart himself: ocean side, just outside Fire Island Inlet, south and west of
+  // the Democrat Point tip. The track ends here and runs for home.
+  outsideFireIslandInlet: {
+    key: "outsideFireIslandInlet",
+    lat: 40.61,
+    lon: -73.305,
+    label: "Just outside Fire Island Inlet",
+    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up in the ocean just outside Fire Island Inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. Then it broke wide open: the boat pulled the same line over and over on trolled spoons and had nine bass aboard by 11:45, with every man on the board. Three of the nine were inside the slot and went in the box; the other six were too big to keep. Lines in at 11:55, docked at 12:30.",
   },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
@@ -140,11 +143,12 @@ export const POINTS = {
  * The outbound leg was all westbound: out the inlet, first drop at Democrat
  * Point at 6:30, then down the ocean beachfront past Gilgo and Jones Beach to
  * Jones Inlet at 7:38 and Long Beach by 8:20. Turned around at 8:52, ran the
- * whole way back east, and set up just outside Democrat Point, where the fleet
- * was. That is where the fish were. Two stripers between 11:00 and 11:20, then
- * run after run over the same line on trolled spoons: nine bass aboard by 11:45,
- * every man on the board, three of them inside the slot and in the box. Called it
- * at 11:55 and ran home through the inlet.
+ * whole way back east, and set up in the ocean just outside Fire Island Inlet,
+ * where the fleet was. That is where the fish were. Two stripers between 11:00
+ * and 11:20, then run after run over the same line on trolled spoons: nine bass
+ * aboard by 11:45, every man on the board, three of them inside the slot and in
+ * the box. The whole day's fishing happened between 11:00 and 11:45. Called it
+ * at 11:55, back at the dock at 12:30.
  *
  * The Lighthouse beachfront and Fire Island Reef sit east of the inlet and were
  * not part of today's run. They stay pinned as references, not on the track.
@@ -157,7 +161,7 @@ export const ROUTE_KEYS = [
   "jonesBeach",
   "jonesInlet",
   "longBeach",
-  "outsideDemocratPoint",
+  "outsideFireIslandInlet",
 ];
 
 /** Pinned on the chart for reference but not on today's track. */
@@ -179,8 +183,8 @@ export const DESTINATION_LABELS = [
   "Home",
 ];
 
-// Fishing outside Democrat Point past the scheduled 11:00 AM return, so the only
-// distance that still matters is the run back to the dock.
+// Fished outside Fire Island Inlet well past the scheduled 11:00 AM return, so
+// the only distance that still mattered was the run back to the dock.
 export const DEFAULT_DESTINATION = "Home";
 
 /** Live data sources. */
@@ -264,7 +268,7 @@ export const SEED_ENTRIES = [
     time: "Nov 7, back east",
     type: "Mark",
     method: "Running",
-    moment: "Ran the whole way back east and set up just outside Democrat Point, ocean side of the inlet. Boats everywhere. Found where everyone is.",
+    moment: "Ran the whole way back east and set up in the ocean just outside Fire Island Inlet. Boats everywhere. Found where everyone is.",
   },
   {
     time: "Nov 7, 11:00 AM",
@@ -284,7 +288,7 @@ export const SEED_ENTRIES = [
     time: "Nov 7, next run",
     type: "Mark",
     method: "Running",
-    moment: "Another run through the same water outside Democrat Point, and this one was massive. Four more bass in the boat.",
+    moment: "Another run through the same water outside the inlet, and this one was massive. Four more bass in the boat.",
   },
   {
     time: "Nov 7, next run",

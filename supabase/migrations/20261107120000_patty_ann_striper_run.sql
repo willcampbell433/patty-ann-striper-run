@@ -335,7 +335,7 @@ values
     'Mark',
     'Running',
     null,
-    'Ran the whole way back east and set up just outside Democrat Point, ocean side of the inlet. Boats everywhere. Found where everyone is.',
+    'Ran the whole way back east and set up in the ocean just outside Fire Island Inlet. Boats everywhere. Found where everyone is.',
     '2026-11-07T05:09:00Z',
     '2026-11-07T05:09:00Z'
   ),
@@ -368,7 +368,7 @@ values
     'Mark',
     'Running',
     null,
-    'Another run through the same water outside Democrat Point, and this one was massive. Four more bass in the boat.',
+    'Another run through the same water outside the inlet, and this one was massive. Four more bass in the boat.',
     '2026-11-07T05:12:00Z',
     '2026-11-07T05:12:00Z'
   ),
