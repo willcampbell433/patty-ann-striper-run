@@ -1918,3 +1918,11 @@ svg.species-art {
 #homeReadout[data-state="late"] {
   color: #ff8d4d;
 }
+
+.gallery-note {
+  margin: 0.5rem 0 0;
+  max-width: 56ch;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--muted, #8a97a8);
+}
