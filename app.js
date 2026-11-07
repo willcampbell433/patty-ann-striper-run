@@ -52,7 +52,7 @@ const seedEntries = [
     time: "Nov 7, dock",
     type: "Boat life",
     method: "Dockside",
-    moment: "Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, John, and Donald. Capt. Greg running it, AJ on the deck.",
+    moment: "Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, Jon, and Don. Capt. Greg running it, AJ on the deck.",
   },
   {
     time: "Nov 7, plan",
@@ -83,6 +83,24 @@ const seedEntries = [
     type: "Mark",
     method: "Running",
     moment: "Off Jones Inlet between Point Lookout and the Jones Beach west end, still running west. About 15 nm from Captree with an 11:00 AM return.",
+  },
+  {
+    time: "Nov 7, ~8:20 AM",
+    type: "Mark",
+    method: "Jigging",
+    moment: "Second stop, off Long Beach. Rods down 20 to 30 minutes with no hits on the jigs, but the bunker were thick and we snagged five or six live ones.",
+  },
+  {
+    time: "Nov 7, ~8:40 AM",
+    type: "Boat life",
+    method: "Live bait",
+    moment: "Three live bunker in the water. Couple of dogfish bites and nothing else, so the bass are not under this bait.",
+  },
+  {
+    time: "Nov 7, 8:52 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.",
   },
 ];
 

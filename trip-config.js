@@ -104,7 +104,7 @@ export const POINTS = {
     lat: 40.58,
     lon: -73.656,
     label: "Long Beach",
-    note: "Next stretch of open beachfront west of Jones Inlet, if the run keeps going that way.",
+    note: "Second stop and the westernmost point of the day, about 8:20 AM. Rods down 20 to 30 minutes with no hits, but the bunker were thick: five or six snagged live, three put in the water. Only dogfish bites. Turned east at 8:52.",
   },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
@@ -125,9 +125,10 @@ export const POINTS = {
 /**
  * The day's working track, in order, drawn as the line on the chart.
  *
- * As run, all westbound: out the inlet, first drop at Democrat Point at 6:30,
- * then down the ocean beachfront past Gilgo and Jones Beach to Jones Inlet by
- * 7:38, still heading west.
+ * The outbound leg was all westbound: out the inlet, first drop at Democrat
+ * Point at 6:30, then down the ocean beachfront past Gilgo and Jones Beach to
+ * Jones Inlet at 7:38 and Long Beach by 8:20. Turned around at 8:52 and is now
+ * running back east toward the morning's water with live bunker aboard.
  *
  * The Lighthouse beachfront and Fire Island Reef sit east of the inlet and were
  * not part of today's run. They stay pinned as references, not on the track.
@@ -139,10 +140,11 @@ export const ROUTE_KEYS = [
   "gilgoBeachfront",
   "jonesBeach",
   "jonesInlet",
+  "longBeach",
 ];
 
 /** Pinned on the chart for reference but not on today's track. */
-export const OFF_TRACK_KEYS = ["lighthouseBeach", "fireIslandReef", "longBeach"];
+export const OFF_TRACK_KEYS = ["lighthouseBeach", "fireIslandReef"];
 
 /**
  * Selectable ETA destinations. Must exactly match the
@@ -160,8 +162,8 @@ export const DESTINATION_LABELS = [
   "Home",
 ];
 
-// Where the boat actually is as of the 7:38 AM mark.
-export const DEFAULT_DESTINATION = "Jones Inlet";
+// Turned east at 8:52 AM, headed back toward the morning's water.
+export const DEFAULT_DESTINATION = "Democrat Point";
 
 /** Live data sources. */
 export const SOURCES = {
