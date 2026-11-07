@@ -360,6 +360,12 @@ export const SEED_ENTRIES = [
     method: "Trolling",
     moment: "Bruce's read on the day: the bass wanted the flutter spoon. They like the jewelry, and the jewelry ended up catching all the fish.",
   },
+  {
+    time: "Nov 7, the ride in",
+    type: "Quote",
+    method: "Other",
+    moment: "Mr. Excitement accepts the title. Dennis, high hook with three: \"As we say on the soccer field, it's excitement time.\"",
+  },
 ];
 
 export const LOG_TYPES = ["Boat life", "Striped bass", "Bluefish", "False albacore", "Blackfish", "Black sea bass", "Weather", "Mark", "Quote"];

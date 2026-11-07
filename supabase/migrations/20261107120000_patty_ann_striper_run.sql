@@ -503,5 +503,16 @@ values
     'Bruce''s read on the day: the bass wanted the flutter spoon. They like the jewelry, and the jewelry ended up catching all the fish.',
     '2026-11-07T05:24:00Z',
     '2026-11-07T05:24:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000011a',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, the ride in',
+    'Quote',
+    'Other',
+    null,
+    'Mr. Excitement accepts the title. Dennis, high hook with three: "As we say on the soccer field, it''s excitement time."',
+    '2026-11-07T05:25:00Z',
+    '2026-11-07T05:25:00Z'
   )
 on conflict (id) do nothing;
