@@ -278,6 +278,33 @@ test("the tracker promises keep GPS on the device", async () => {
   );
 });
 
+test("seed log entries sort before anything logged on the water", async () => {
+  const [app, migration] = await Promise.all([read("app.js"), read(migrationPath)]);
+
+  // Regression: seeds anchored to the departure estimate were timestamped ahead of
+  // real entries whenever the estimate ran late, which rendered the log out of order.
+  assert.ok(
+    app.includes("const seedAnchor = new Date(`${TRIP.date}T00:00:00-05:00`)"),
+    "seeds must anchor to the start of the trip day, not to the departure estimate",
+  );
+  assert.ok(
+    !/created_at: new Date\(departure\.getTime\(\)/.test(app),
+    "seeds must not be timestamped from the departure estimate",
+  );
+
+  const dayStart = new Date(`${TRIP.date}T00:00:00-05:00`);
+  const departure = new Date(TRIP.departureIso);
+  const seedStamps = [...migration.matchAll(/'(2026-11-07T\d{2}:\d{2}:\d{2}Z)'/g)].map((m) => new Date(m[1]));
+  assert.ok(seedStamps.length > 0, "the migration should seed timestamped rows");
+  seedStamps.forEach((stamp) => {
+    assert.ok(stamp >= dayStart, `seed ${stamp.toISOString()} predates the trip day`);
+    assert.ok(
+      stamp <= departure,
+      `seed ${stamp.toISOString()} is after departure, so real entries would sort above it`,
+    );
+  });
+});
+
 test("the build output contains every file the page loads", async () => {
   const [html, build] = await Promise.all([read("index.html"), read("scripts/generate-shared-config.mjs")]);
   const localScripts = [...html.matchAll(/src="(?!http)([^"]+\.js)"/g)].map((m) => m[1]);

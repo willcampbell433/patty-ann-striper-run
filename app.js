@@ -1071,7 +1071,13 @@ function stableEntryUuid(entry, index) {
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-4${hex.slice(13, 16)}-8${hex.slice(17, 20)}-${hex.slice(20, 32)}`;
 }
 
+// Seeds are anchored to the start of the trip day, not to the departure estimate.
+// Anchoring them to departure would timestamp them ahead of real entries whenever
+// the estimate runs late, and the log would render out of order.
+const seedAnchor = new Date(`${TRIP.date}T00:00:00-05:00`);
+
 function legacyEntryToShared(entry, index) {
+  const stamp = new Date(seedAnchor.getTime() + index * 60000).toISOString();
   return {
     id: stableEntryUuid(entry, index),
     trip_id: TRIP.id,
@@ -1080,8 +1086,8 @@ function legacyEntryToShared(entry, index) {
     method: entry.method,
     angler: entry.angler || null,
     moment: entry.moment,
-    created_at: new Date(departure.getTime() + index * 60000).toISOString(),
-    updated_at: new Date(departure.getTime() + index * 60000).toISOString(),
+    created_at: stamp,
+    updated_at: stamp,
   };
 }
 

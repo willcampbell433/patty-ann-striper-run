@@ -234,8 +234,8 @@ values
     'Dockside',
     null,
     'Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, John, and Donald. Capt. Greg running it, AJ on the deck.',
-    '2026-11-07T12:00:00Z',
-    '2026-11-07T12:00:00Z'
+    '2026-11-07T05:00:00Z',
+    '2026-11-07T05:00:00Z'
   ),
   (
     'a7770000-0000-4000-8000-000000000102',
@@ -245,8 +245,8 @@ values
     'Running',
     null,
     'Out Fire Island Inlet, work the Democrat Point rips, then the Lighthouse beachfront and Fire Island Reef. Fall run, so the bait decides.',
-    '2026-11-07T12:01:00Z',
-    '2026-11-07T12:01:00Z'
+    '2026-11-07T05:01:00Z',
+    '2026-11-07T05:01:00Z'
   ),
   (
     'a7770000-0000-4000-8000-000000000103',
@@ -256,7 +256,7 @@ values
     'Other',
     null,
     'Striped bass: 28 to under 31 inch slot, one fish per person, inline circle hooks when fishing bait. Everything else goes back.',
-    '2026-11-07T12:02:00Z',
-    '2026-11-07T12:02:00Z'
+    '2026-11-07T05:02:00Z',
+    '2026-11-07T05:02:00Z'
   )
 on conflict (id) do nothing;
