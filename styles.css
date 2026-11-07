@@ -1903,3 +1903,18 @@ svg.species-art {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Turn-for-home readout: the number that matters against a fixed dock time. */
+.tracker-readouts article.home-timing {
+  grid-column: 1 / -1;
+  border-color: rgba(255, 141, 77, 0.42);
+  background: rgba(255, 141, 77, 0.08);
+}
+
+#homeReadout[data-state="soon"] {
+  color: #ffc24d;
+}
+
+#homeReadout[data-state="late"] {
+  color: #ff8d4d;
+}

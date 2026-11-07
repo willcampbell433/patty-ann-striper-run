@@ -12,9 +12,11 @@ export const TRIP = {
   slug: "patty-ann-2026-11-07",
   title: "The Patty Ann",
   date: "2026-11-07",
-  // Estimate only: the crew was already underway before 6:40 AM. Confirm the real
-  // time with Capt. Greg and change this one line; the trip clock follows it.
-  departureIso: "2026-11-07T06:30:00-05:00",
+  // Confirmed from Bruce's trip message: sails 6:00 AM, back by 11:00 AM,
+  // crew aboard by 5:30. The trip clock and the turn-for-home timing follow these.
+  departureIso: "2026-11-07T06:00:00-05:00",
+  returnByIso: "2026-11-07T11:00:00-05:00",
+  boardingIso: "2026-11-07T05:30:00-05:00",
   dayEndIso: "2026-11-08T00:00:00-05:00",
   boat: "Patty Ann",
   boatDetail: "Patty Ann Charters, Captree State Park",
@@ -25,13 +27,17 @@ export const TRIP = {
   primaryTarget: "Striped bass",
 };
 
+/**
+ * First names only. This board is public, so surnames, home towns, and the rest
+ * of the roster detail stay off it.
+ */
 export const CREW = [
-  { name: "Bruce", role: "Dad", note: "The reason the six of us are on the water today. Chief morale officer." },
+  { name: "Bruce", role: "Trip organizer", note: "Will's dad. Put the whole thing together, booked the boat, and wrote the briefing. Chief morale officer." },
   { name: "Will", role: "Lookout / Trip Log", note: "Watching for birds, bait, and blitzes, then calling it out fast. Also on photos and this board." },
-  { name: "Tom", role: "Deck", note: "Steady hands on the rail and a good read on where the fish went." },
-  { name: "Dennis", role: "Deck", note: "Long-game angler. Will out-wait a slow bite and get paid for it." },
-  { name: "John", role: "Deck", note: "Will have a bass on before anyone finishes rigging." },
-  { name: "Donald", role: "Deck", note: "Quietly outfishes everybody and says nothing about it." },
+  { name: "Tom", role: "Deck", note: "Played lacrosse with Bruce back in the day. Has his own boat, so he knows exactly where the fish aren't." },
+  { name: "Dennis", role: "Deck", note: "Lifelong fisherman, now a Hobie fishing kayak guy. Also tutored Will for the SATs, so he has already made him suffer once." },
+  { name: "Jon", role: "Deck", note: "Another one from the old lacrosse crew. Made the trip down from the North Shore." },
+  { name: "Don", role: "Deck", note: "Long Island Vice. Grew up a few houses from Bruce and has been his friend ever since. Fisherman and pickleball menace." },
 ];
 
 export const BOAT_CREW = [
@@ -84,7 +90,21 @@ export const POINTS = {
     lat: 40.58,
     lon: -73.524,
     label: "Jones Beach",
-    note: "West end of the beachfront run, about half a mile off the sand. Passed eastbound at 7:30 AM.",
+    note: "Passed westbound about half a mile off the sand at 7:30 AM.",
+  },
+  jonesInlet: {
+    key: "jonesInlet",
+    lat: 40.578,
+    lon: -73.57,
+    label: "Jones Inlet",
+    note: "Position at 7:38 AM, off the inlet mouth between Point Lookout and the Jones Beach west end. Still running west.",
+  },
+  longBeach: {
+    key: "longBeach",
+    lat: 40.58,
+    lon: -73.656,
+    label: "Long Beach",
+    note: "Next stretch of open beachfront west of Jones Inlet, if the run keeps going that way.",
   },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
@@ -105,25 +125,32 @@ export const POINTS = {
 /**
  * The day's working track, in order, drawn as the line on the chart.
  *
- * As run: out the inlet, first drop at Democrat Point at 6:30, then a westward
- * run down the beachfront as far as Jones Beach by 7:30, now working back east
- * through Gilgo. The Lighthouse beachfront and the reef are still ahead.
+ * As run, all westbound: out the inlet, first drop at Democrat Point at 6:30,
+ * then down the ocean beachfront past Gilgo and Jones Beach to Jones Inlet by
+ * 7:38, still heading west.
+ *
+ * The Lighthouse beachfront and Fire Island Reef sit east of the inlet and were
+ * not part of today's run. They stay pinned as references, not on the track.
  */
 export const ROUTE_KEYS = [
   "captree",
   "fireIslandInlet",
   "democratPoint",
-  "jonesBeach",
   "gilgoBeachfront",
-  "lighthouseBeach",
-  "fireIslandReef",
+  "jonesBeach",
+  "jonesInlet",
 ];
+
+/** Pinned on the chart for reference but not on today's track. */
+export const OFF_TRACK_KEYS = ["lighthouseBeach", "fireIslandReef", "longBeach"];
 
 /**
  * Selectable ETA destinations. Must exactly match the
  * trip_state.active_destination check constraint in the migration.
  */
 export const DESTINATION_LABELS = [
+  "Long Beach",
+  "Jones Inlet",
   "Jones Beach",
   "Gilgo beachfront",
   "Fire Island Inlet",
@@ -133,8 +160,8 @@ export const DESTINATION_LABELS = [
   "Home",
 ];
 
-// Next spot east of the 7:30 AM Jones Beach position.
-export const DEFAULT_DESTINATION = "Gilgo beachfront";
+// Where the boat actually is as of the 7:38 AM mark.
+export const DEFAULT_DESTINATION = "Jones Inlet";
 
 /** Live data sources. */
 export const SOURCES = {

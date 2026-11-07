@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Private trip board. Shareable by link, but keep it out of search results. -->
+    <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
       content="The Patty Ann striped bass trip board for November 7, 2026. Live GPS tracker, route chart out Fire Island Inlet, marine weather, tides, crew, striper regulations, species guide, and trip log."
@@ -63,7 +65,7 @@
           </svg>
         </div>
         <div class="hero-copy">
-          <p class="signal">Captree to the ocean | Saturday, Nov 7, 2026</p>
+          <p class="signal">Captree, 6:00 AM to 11:00 AM | Saturday, Nov 7, 2026</p>
           <h1>Six aboard. Stripers ahead.</h1>
           <p class="hero-text">
             Bruce, Will, Tom, Dennis, John, and Donald are running the <em>Patty Ann</em> out of
@@ -98,12 +100,12 @@
           </div>
           <div class="mission-stats">
             <div>
-              <small>Depart</small>
-              <strong>Captree Boat Basin</strong>
+              <small>Sailed</small>
+              <strong>Captree, 6:00 AM</strong>
             </div>
             <div>
               <small>Last mark</small>
-              <strong>Jones Beach, 7:30 AM</strong>
+              <strong>Jones Inlet, 7:38 AM</strong>
             </div>
             <div>
               <small>Drops so far</small>
@@ -114,8 +116,8 @@
               <strong>Striped bass</strong>
             </div>
             <div>
-              <small>Return</small>
-              <strong>Back at Captree, time TBD</strong>
+              <small>Back at the dock</small>
+              <strong>11:00 AM</strong>
             </div>
           </div>
           <div class="boat-strip">
@@ -150,8 +152,10 @@
             <label class="tracker-destination" for="destinationControl">
               ETA destination
               <select id="destinationControl" disabled>
+                <option>Long Beach</option>
+                <option selected>Jones Inlet</option>
                 <option>Jones Beach</option>
-                <option selected>Gilgo beachfront</option>
+                <option>Gilgo beachfront</option>
                 <option>Fire Island Inlet</option>
                 <option>Democrat Point</option>
                 <option>Lighthouse beachfront</option>
@@ -174,6 +178,10 @@
             <article>
               <small>Distance + ETA</small>
               <strong id="etaReadout">Available once tracking starts</strong>
+            </article>
+            <article class="home-timing">
+              <small>Turn for home — 11:00 AM return</small>
+              <strong id="homeReadout" data-state="ok">Available once tracking starts</strong>
             </article>
           </div>
         </div>
@@ -208,11 +216,12 @@
             </div>
             <div>
               <small>Working track</small>
-              <strong>Inlet → Democrat Point → Jones Beach → Gilgo → Lighthouse → Reef</strong>
+              <strong>Inlet → Democrat Point → Gilgo → Jones Beach → Jones Inlet</strong>
               <p>
-                As run: first drop at Democrat Point at 6:30, then a westward run down the
-                beachfront as far as Jones Beach by 7:30, now working back east through Gilgo. The
-                Lighthouse beachfront and the reef are still ahead.
+                All westbound. First drop at Democrat Point at 6:30, then down the ocean beachfront
+                past Gilgo and Jones Beach to Jones Inlet by 7:38, still running west. The
+                Lighthouse beachfront and Fire Island Reef are east of the inlet and are pinned as
+                references only, greyed out and off the line.
               </p>
             </div>
           </aside>
@@ -235,11 +244,11 @@
             </div>
             <div>
               <small>Destination</small>
-              <strong id="currentTripDestination">Gilgo beachfront</strong>
+              <strong id="currentTripDestination">Jones Inlet</strong>
             </div>
             <div class="current-trip-note">
               <small>Latest note</small>
-              <strong id="currentTripNote">Passed Jones Beach about half a mile off the sand, still cruising east.</strong>
+              <strong id="currentTripNote">Off Jones Inlet at 7:38 AM, still running west.</strong>
             </div>
           </div>
           <p class="trip-update-help">One save updates the live trip status and adds a timestamped entry to the Trip Log.</p>
@@ -294,8 +303,8 @@
                   <option>Will</option>
                   <option>Tom</option>
                   <option>Dennis</option>
-                  <option>John</option>
-                  <option>Donald</option>
+                  <option>Jon</option>
+                  <option>Don</option>
                 </select>
               </label>
               <label>
@@ -322,7 +331,7 @@
           </div>
           <div class="crew-tally" role="group" aria-label="Fish standings">
             <div class="leaderboard-header">
-              <small>Bruce vs Will vs Tom vs Dennis vs John vs Donald</small>
+              <small>Bruce vs Will vs Tom vs Dennis vs Jon vs Don</small>
               <strong>Striper Standings</strong>
             </div>
             <ul class="tally-list" id="crewTally"></ul>
@@ -358,29 +367,29 @@
             <p>Rigging, gaffing, netting, and keeping six guys untangled. Tip the mate.</p>
           </article>
           <article class="crew-card">
-            <span>Dad</span>
+            <span>Trip organizer</span>
             <h3>Bruce</h3>
-            <p>The reason the six of us are on the water today. Chief morale officer.</p>
+            <p>Will's dad. Put the whole thing together, booked the boat, and wrote the briefing. Chief morale officer.</p>
           </article>
           <article class="crew-card">
             <span>Deck</span>
             <h3>Tom</h3>
-            <p>Steady hands on the rail and a good read on where the fish went.</p>
+            <p>Played lacrosse with Bruce back in the day. Has his own boat, so he knows exactly where the fish aren't.</p>
           </article>
           <article class="crew-card">
             <span>Deck</span>
             <h3>Dennis</h3>
-            <p>Long-game angler. Will out-wait a slow bite and get paid for it.</p>
+            <p>Lifelong fisherman, now a Hobie fishing kayak guy. Also tutored Will for the SATs, so he has already made him suffer once.</p>
           </article>
           <article class="crew-card">
             <span>Deck</span>
-            <h3>John</h3>
-            <p>Will have a bass on before anyone else finishes rigging.</p>
+            <h3>Jon</h3>
+            <p>Another one from the old lacrosse crew. Made the trip down from the North Shore.</p>
           </article>
           <article class="crew-card">
             <span>Deck</span>
-            <h3>Donald</h3>
-            <p>Quietly outfishes everybody and says nothing about it.</p>
+            <h3>Don</h3>
+            <p>Long Island Vice. Grew up a few houses from Bruce and has been his friend ever since. Fisherman and pickleball menace.</p>
           </article>
           <article class="crew-card">
             <span>Lookout / Trip Log</span>
@@ -437,14 +446,19 @@
               <span>DEC artificial reef, 62 to 73 feet, 744 acres, 2.0 nm south of the lighthouse. Bass, blackfish, and sea bass on structure.</span>
             </article>
             <article>
-              <small>7:30 AM, turnaround</small>
-              <strong>Jones Beach</strong>
-              <span>West end of the beachfront run, about half a mile off the sand. Passed eastbound and still cruising.</span>
+              <small>Passed westbound</small>
+              <strong>Gilgo beachfront</strong>
+              <span>Ocean side between the inlet and Jones Beach. Prime run-and-gun water when the bait pushes west.</span>
             </article>
             <article>
-              <small>Working east</small>
-              <strong>Gilgo beachfront</strong>
-              <span>Ocean side between Jones Beach and the inlet. Prime run-and-gun water when the bait pushes west.</span>
+              <small>7:30 AM</small>
+              <strong>Jones Beach</strong>
+              <span>Half a mile off the sand, heading west down the beachfront.</span>
+            </article>
+            <article>
+              <small>7:38 AM, current</small>
+              <strong>Jones Inlet</strong>
+              <span>Off the inlet mouth between Point Lookout and the Jones Beach west end. Still running west.</span>
             </article>
           </div>
           <div class="canyon-intel" role="group" aria-label="Fall run intel">
@@ -461,10 +475,10 @@
               <small>Where to start</small>
               <h3>Rips, then beachfront, then structure</h3>
               <ul>
-                <li><strong>Jones Beach to Gilgo:</strong> run the beachfront east and cover water until birds show.</li>
-                <li><strong>Democrat Point:</strong> worth a second look on a different tide stage.</li>
-                <li><strong>Lighthouse beachfront:</strong> run the bars and look for birds over troughs.</li>
-                <li><strong>Fire Island Reef:</strong> drop on the structure when the beach is quiet.</li>
+                <li><strong>Gilgo to Jones Inlet:</strong> run the beachfront west and cover water until birds show.</li>
+                <li><strong>Jones Inlet:</strong> inlet mouths concentrate bait on a moving tide, same as Democrat Point.</li>
+                <li><strong>Democrat Point:</strong> worth a second look on the way home, on a different tide stage.</li>
+                <li><strong>Watch the clock:</strong> back at the dock by 11:00, and Captree is about 15 nm east of here.</li>
               </ul>
             </article>
             <article>
@@ -837,17 +851,17 @@
         </div>
 
         <div class="checklist">
-          <h3>Before leaving Captree</h3>
+          <h3>The briefing, per Bruce</h3>
           <ul>
+            <li>Sails 6:00 AM, back at the dock 11:00 AM. Aboard by 5:30.</li>
+            <li>The Patty Ann ties up directly behind the concession at Captree.</li>
+            <li>The boat supplies all tackle and jigs. Bring a heavy bass setup if you want one.</li>
+            <li>Bring your own food and drinks.</li>
+            <li>Dramamine at home before you leave, not on the boat. We are fishing in the ocean.</li>
+            <li>Cash for the mate, exact if you can.</li>
+            <li>Dress for fall fishing on the ocean: base layer, fleece, windproof shell, hat, gloves.</li>
             <li>Everyone registered with the NY Recreational Marine Fishing Registry.</li>
-            <li>Check NOAA coastal waters forecast, NDBC 44025, Windy, and the inlet conditions.</li>
-            <li>Confirm the tide stage for Fire Island Inlet with the captain.</li>
             <li>Inline circle hooks on every bait rig. Measuring tape and a wet rag within reach.</li>
-            <li>November layers: base layer, fleece, windproof shell, warm hat, gloves.</li>
-            <li>Polarized glasses, sunscreen, deck shoes with grip.</li>
-            <li>Battery pack, dry bag, phone in something waterproof.</li>
-            <li>Water, real food, salty snacks. Cash for the mate.</li>
-            <li>Seasick meds the night before, not on the boat.</li>
           </ul>
         </div>
       </section>

@@ -20,6 +20,30 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 const migrationPath =
   "supabase/migrations/20261107120000_patty_ann_striper_run.sql";
 
+test("the charter's fixed dock times are set and ordered", () => {
+  const boarding = new Date(TRIP.boardingIso);
+  const departure = new Date(TRIP.departureIso);
+  const returnBy = new Date(TRIP.returnByIso);
+  [boarding, departure, returnBy].forEach((d) => assert.ok(Number.isFinite(d.getTime())));
+  assert.ok(boarding < departure, "the crew boards before the boat sails");
+  assert.ok(departure < returnBy, "the boat sails before it is due back");
+  // Bruce's briefing: aboard 5:30, sails 6:00, back 11:00.
+  assert.equal(TRIP.departureIso, "2026-11-07T06:00:00-05:00");
+  assert.equal(TRIP.returnByIso, "2026-11-07T11:00:00-05:00");
+});
+
+test("the turn-for-home readout is wired to the return time", async () => {
+  const [html, app] = await Promise.all([read("index.html"), read("app.js")]);
+  assert.ok(html.includes('id="homeReadout"'), "the tracker needs a turn-for-home readout");
+  assert.ok(app.includes("const returnBy = new Date(TRIP.returnByIso)"), "it must read the configured return");
+  assert.ok(app.includes("function refreshHomeTiming"), "the readout needs its own refresh");
+  // It must always measure against the dock, never the selected ETA destination.
+  const fn = app.match(/function refreshHomeTiming\(\)[\s\S]*?\n\}/);
+  assert.ok(fn, "expected the home-timing function");
+  assert.ok(fn[0].includes("POINTS.home"), "home timing must measure to the dock");
+  assert.ok(!fn[0].includes("trackerDestination"), "home timing must not follow the ETA destination");
+});
+
 test("the trip identifies the right boat, crew, and day", () => {
   assert.equal(TRIP.slug, "patty-ann-2026-11-07");
   assert.equal(TRIP.date, "2026-11-07");
@@ -30,7 +54,7 @@ test("the trip identifies the right boat, crew, and day", () => {
 
   assert.deepEqual(
     CREW.map((member) => member.name),
-    ["Bruce", "Will", "Tom", "Dennis", "John", "Donald"],
+    ["Bruce", "Will", "Tom", "Dennis", "Jon", "Don"],
     "six aboard, in the order Will listed them",
   );
   assert.equal(new Set(CREW.map((m) => m.name)).size, 6, "no duplicate anglers in the standings");
@@ -56,9 +80,9 @@ test("every waypoint sits on the south shore run, not somewhere else", () => {
       point.lat > 40.5 && point.lat < 40.75,
       `${key} latitude ${point.lat} is outside the south shore beachfront run`,
     );
-    // West bound reaches Jones Beach, east bound reaches the Fire Island Lighthouse.
+    // West bound reaches Long Beach, east bound reaches the Fire Island Lighthouse.
     assert.ok(
-      point.lon > -73.56 && point.lon < -73.15,
+      point.lon > -73.7 && point.lon < -73.15,
       `${key} longitude ${point.lon} is outside the south shore beachfront run`,
     );
   }

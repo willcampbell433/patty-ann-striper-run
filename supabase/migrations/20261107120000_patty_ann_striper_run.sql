@@ -92,6 +92,8 @@ alter table public.trip_state
   check (
     active_destination in (
       -- Patty Ann, Nov 7 2026
+      'Long Beach',
+      'Jones Inlet',
       'Jones Beach',
       'Gilgo beachfront',
       'Fire Island Inlet',
@@ -218,8 +220,8 @@ insert into public.trip_state (trip_id, status, active_destination, return_note,
 values (
   'a7770000-0000-4000-8000-000000000001',
   'underway',
-  'Gilgo beachfront',
-  'Passed Jones Beach about half a mile off the sand, still cruising east.',
+  'Jones Inlet',
+  'Off Jones Inlet at 7:38 AM, still running west.',
   '2026-11-07T05:00:00Z'
 )
 on conflict (trip_id) do nothing;
@@ -278,8 +280,19 @@ values
     'Mark',
     'Running',
     null,
-    'Passed Jones Beach about half a mile off the sand, still cruising east. Working the beachfront back toward Gilgo and the inlet.',
+    'Passed Jones Beach about half a mile off the sand, heading west down the beachfront.',
     '2026-11-07T05:04:00Z',
     '2026-11-07T05:04:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000106',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 7:38 AM',
+    'Mark',
+    'Running',
+    null,
+    'Off Jones Inlet between Point Lookout and the Jones Beach west end, still running west. About 15 nm from Captree with an 11:00 AM return.',
+    '2026-11-07T05:05:00Z',
+    '2026-11-07T05:05:00Z'
   )
 on conflict (id) do nothing;

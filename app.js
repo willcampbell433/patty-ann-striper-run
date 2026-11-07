@@ -3,12 +3,16 @@ import {
   CREW,
   POINTS,
   ROUTE_KEYS,
+  OFF_TRACK_KEYS,
   DEFAULT_DESTINATION,
   SOURCES,
   CATCH_TYPES,
 } from "./trip-config.js";
 
 const departure = new Date(TRIP.departureIso);
+const returnBy = new Date(TRIP.returnByIso);
+// Used only when the GPS has not produced a usable speed yet.
+const ASSUMED_CRUISE_KT = 20;
 const tripDayEnd = new Date(TRIP.dayEndIso);
 const storageKey = `${TRIP.slug}-log-v1`;
 
@@ -72,7 +76,13 @@ const seedEntries = [
     time: "Nov 7, 7:30 AM",
     type: "Mark",
     method: "Running",
-    moment: "Passed Jones Beach about half a mile off the sand, still cruising east. Working the beachfront back toward Gilgo and the inlet.",
+    moment: "Passed Jones Beach about half a mile off the sand, heading west down the beachfront.",
+  },
+  {
+    time: "Nov 7, 7:38 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Off Jones Inlet between Point Lookout and the Jones Beach west end, still running west. About 15 nm from Captree with an 11:00 AM return.",
   },
 ];
 
@@ -95,6 +105,7 @@ const els = {
   positionReadout: document.querySelector("#positionReadout"),
   speedCourseReadout: document.querySelector("#speedCourseReadout"),
   etaReadout: document.querySelector("#etaReadout"),
+  homeReadout: document.querySelector("#homeReadout"),
   crewTally: document.querySelector("#crewTally"),
   tripUpdateForm: document.querySelector("#tripUpdateForm"),
   tripUpdateInput: document.querySelector("#tripUpdateInput"),
@@ -300,13 +311,60 @@ function setTrackerDestination(label) {
 }
 
 function refreshTrackerEta() {
-  if (!els.etaReadout) return;
+  if (els.etaReadout) {
+    if (!latestTrackerFix) {
+      els.etaReadout.textContent = `Start live location for distance and ETA to ${trackerDestination.label}.`;
+    } else {
+      const { latitude, longitude, speed } = latestTrackerFix;
+      updateEta(nmBetween({ lat: latitude, lon: longitude }, trackerDestination), speed);
+    }
+  }
+  refreshHomeTiming();
+}
+
+function formatClockTime(date) {
+  return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}
+
+/**
+ * The charter is booked back at the dock by a fixed time, so the number that
+ * actually matters while running west is not the ETA to the next spot. It is
+ * the latest moment the boat can turn and still make it home.
+ */
+function refreshHomeTiming() {
+  if (!els.homeReadout) return;
+
+  const returnLabel = formatClockTime(returnBy);
   if (!latestTrackerFix) {
-    els.etaReadout.textContent = `Start live location for distance and ETA to ${trackerDestination.label}.`;
+    els.homeReadout.textContent = `Start live location to see the latest turn for a ${returnLabel} return.`;
     return;
   }
+
   const { latitude, longitude, speed } = latestTrackerFix;
-  updateEta(nmBetween({ lat: latitude, lon: longitude }, trackerDestination), speed);
+  const homeNm = nmBetween({ lat: latitude, lon: longitude }, POINTS.home);
+  const measuredKt = Number.isFinite(speed) && speed !== null ? speed * 1.94384 : null;
+  const usableKt = measuredKt && measuredKt > 3 ? measuredKt : ASSUMED_CRUISE_KT;
+  const assumed = !(measuredKt && measuredKt > 3);
+
+  const minutesHome = (homeNm / usableKt) * 60;
+  const turnBy = new Date(returnBy.getTime() - minutesHome * 60000);
+  const slackMinutes = Math.round((turnBy - Date.now()) / 60000);
+
+  const basis = assumed ? `assuming ${ASSUMED_CRUISE_KT} kt` : `at ${usableKt.toFixed(1)} kt`;
+  const run = `${homeNm.toFixed(1)} nm home, ~${Math.round(minutesHome)} min ${basis}.`;
+
+  if (slackMinutes <= 0) {
+    els.homeReadout.textContent = `${run} Past the turn for a ${returnLabel} return.`;
+    els.homeReadout.dataset.state = "late";
+    return;
+  }
+
+  const hours = Math.floor(slackMinutes / 60);
+  const mins = slackMinutes % 60;
+  const slack = hours ? `${hours}h ${String(mins).padStart(2, "0")}m` : `${mins}m`;
+  els.homeReadout.textContent =
+    `${run} Turn by ${formatClockTime(turnBy)} for a ${returnLabel} return, ${slack} of fishing left.`;
+  els.homeReadout.dataset.state = slackMinutes <= 30 ? "soon" : "ok";
 }
 
 function updateEta(remainingNm, speedMs) {
@@ -365,7 +423,8 @@ function initMap() {
   });
 
   const latLngs = route.map((p) => [p.lat, p.lon]);
-  const allLatLngs = latLngs;
+  const offTrack = OFF_TRACK_KEYS.map((key) => POINTS[key]);
+  const allLatLngs = [...latLngs, ...offTrack.map((p) => [p.lat, p.lon])];
 
   L.polyline(latLngs, {
     color: "#ff8d4d",
@@ -392,6 +451,19 @@ function initMap() {
     } else if (isInlet) {
       marker.bindTooltip("Fire Island Inlet", { permanent: true, direction: "right", offset: [10, 0] });
     }
+  });
+
+  // Reference spots that are not part of today's run get a muted pin and no line.
+  offTrack.forEach((p) => {
+    L.circleMarker([p.lat, p.lon], {
+      radius: 6,
+      color: "#04111d",
+      weight: 3,
+      fillColor: "#9fb5c7",
+      fillOpacity: 0.85,
+    })
+      .addTo(map)
+      .bindPopup(`<strong>${p.label}</strong><br>${p.note}`);
   });
 
   map.fitBounds(allLatLngs, { padding: [36, 36] });
