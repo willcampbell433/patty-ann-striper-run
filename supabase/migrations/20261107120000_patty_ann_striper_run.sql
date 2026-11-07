@@ -492,5 +492,16 @@ values
     'Hats off to Greg and AJ for sticking it out. They had no afternoon trip, kept working almost an hour past the booked dock time, and stayed on the fish right to the end. Nobody is complaining.',
     '2026-11-07T05:23:00Z',
     '2026-11-07T05:23:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000119',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, the ride in',
+    'Quote',
+    'Trolling',
+    null,
+    'Bruce''s read on the day: the bass wanted the flutter spoon. They like the jewelry, and the jewelry ended up catching all the fish.',
+    '2026-11-07T05:24:00Z',
+    '2026-11-07T05:24:00Z'
   )
 on conflict (id) do nothing;

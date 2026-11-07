@@ -354,6 +354,12 @@ export const SEED_ENTRIES = [
     method: "Other",
     moment: "Hats off to Greg and AJ for sticking it out. They had no afternoon trip, kept working almost an hour past the booked dock time, and stayed on the fish right to the end. Nobody is complaining.",
   },
+  {
+    time: "Nov 7, the ride in",
+    type: "Quote",
+    method: "Trolling",
+    moment: "Bruce's read on the day: the bass wanted the flutter spoon. They like the jewelry, and the jewelry ended up catching all the fish.",
+  },
 ];
 
 export const LOG_TYPES = ["Boat life", "Striped bass", "Bluefish", "False albacore", "Blackfish", "Black sea bass", "Weather", "Mark", "Quote"];
