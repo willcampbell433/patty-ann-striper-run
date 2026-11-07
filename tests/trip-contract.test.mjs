@@ -233,19 +233,43 @@ test("the striped bass rules on the page match the May 12 2026 DEC revision", as
   );
 });
 
-test("the species guide leads with striped bass and covers the realistic catch", async () => {
+test("the species guide covers only what was actually in play, with real photos", async () => {
   const html = await read("index.html");
   const cards = [...html.matchAll(/<article class="species-card ([a-z]+)">/g)].map((m) => m[1]);
-  assert.equal(cards[0], "striper", "striped bass goes first, it is the target");
-  assert.deepEqual(cards, ["striper", "bluefish"], "the recap keeps the two that were actually in play");
+  // Will's call: striped bass is the target, bunker was the bait, dogfish were the only
+  // thing biting on it. Nothing else belongs on a recap of this trip.
+  assert.deepEqual(cards, ["striper", "bunker", "dogfish"]);
+  assert.ok(!/species-card bluefish|species-card albie|species-card blackfish|species-card seabass/.test(html),
+    "species that never showed up should not be on the page");
 
   assert.ok(html.includes("Morone saxatilis"), "the primer should name the species");
   assert.ok(/anadromous/i.test(html), "the migration is why the fall run exists");
 
-  // Each card must carry real art, not a broken image reference.
-  const artCount = [...html.matchAll(/<svg class="species-art"/g)].length;
-  assert.equal(artCount, cards.length, "every species card needs its illustration");
-  assert.ok(!/src="assets\//.test(html), "no leftover raster assets from the old trip");
+  // Every card carries a real photo with alt text and a credit line.
+  const photos = [...html.matchAll(/<img class="species-photo" src="(assets\/species\/[a-z-]+\.jpg)" alt="([^"]+)"/g)];
+  assert.equal(photos.length, cards.length, "every species card needs its photo");
+  photos.forEach(([, src, alt]) => {
+    assert.ok(alt.length > 20, `${src} needs descriptive alt text`);
+  });
+  assert.equal(
+    [...html.matchAll(/<small class="species-credit">/g)].length,
+    cards.length,
+    "each photo must credit its source",
+  );
+});
+
+test("every species photo the page requests exists on disk and is credited", async () => {
+  const { readFile, stat } = await import("node:fs/promises");
+  const [html, credits] = await Promise.all([read("index.html"), read("assets/species/CREDITS.md")]);
+  const sources = [...html.matchAll(/src="(assets\/[^"]+)"/g)].map((m) => m[1]);
+  assert.ok(sources.length > 0, "expected species photos");
+  for (const src of sources) {
+    const file = await stat(new URL(`../${src}`, import.meta.url));
+    assert.ok(file.size > 1024, `${src} is missing or empty`);
+    const name = src.split("/").pop();
+    assert.ok(credits.includes(name), `${name} has no license entry in CREDITS.md`);
+  }
+  void readFile;
 });
 
 test("the shared client never learns the boat's position", async () => {
@@ -340,6 +364,7 @@ test("the build output contains every file the page loads", async () => {
   }
   // trip-config.js is imported by app.js rather than referenced in the HTML.
   assert.ok(build.includes('"trip-config.js"'), "the build must copy trip-config.js");
+  assert.ok(build.includes('"assets"'), "the build must copy the species photos into dist");
   assert.ok(
     build.includes("window.PATTY_ANN_SHARED_CONFIG"),
     "the generated config must use the namespace app.js reads",

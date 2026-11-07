@@ -23,6 +23,8 @@ for (const path of [
   "trip-config.js",
   "shared-store.js",
   "photo-utils.js",
+  // Species photos. Licensing for each file is recorded in assets/species/CREDITS.md.
+  "assets",
 ]) {
   await cp(join(sourceRoot, path), join(outputRoot, path), { recursive: true });
 }
