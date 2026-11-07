@@ -366,6 +366,12 @@ export const SEED_ENTRIES = [
     method: "Other",
     moment: "Mr. Excitement accepts the title. Dennis, high hook with three: \"As we say on the soccer field, it's excitement time.\"",
   },
+  {
+    time: "Nov 7, 12:45 PM",
+    type: "Boat life",
+    method: "Dockside",
+    moment: "Tied up, fish cleaned and split, and everybody is driving home with a bag. Six guys, six fish caught, nobody skunked, and three keepers in the slot to divide up. Everyone is happy. That is the whole trip.",
+  },
 ];
 
 export const LOG_TYPES = ["Boat life", "Striped bass", "Bluefish", "False albacore", "Blackfish", "Black sea bass", "Weather", "Mark", "Quote"];

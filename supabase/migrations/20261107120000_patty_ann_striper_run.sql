@@ -514,5 +514,16 @@ values
     'Mr. Excitement accepts the title. Dennis, high hook with three: "As we say on the soccer field, it''s excitement time."',
     '2026-11-07T05:25:00Z',
     '2026-11-07T05:25:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000011b',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 12:45 PM',
+    'Boat life',
+    'Dockside',
+    null,
+    'Tied up, fish cleaned and split, and everybody is driving home with a bag. Six guys, six fish caught, nobody skunked, and three keepers in the slot to divide up. Everyone is happy. That is the whole trip.',
+    '2026-11-07T05:26:00Z',
+    '2026-11-07T05:26:00Z'
   )
 on conflict (id) do nothing;
