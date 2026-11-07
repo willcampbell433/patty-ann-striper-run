@@ -9,7 +9,7 @@ listed below. Files are resized, cropped, and re-encoded as JPEG; nothing else i
 | --- | --- | --- | --- | --- |
 | `striped-bass.jpg` | Striped bass (*Morone saxatilis*) | [Commons](https://commons.wikimedia.org/wiki/File:Striped_bass,_Boston_Aquarium.JPG) | Steven G. Johnson | CC BY-SA 3.0 |
 | `bunker.jpg` | Atlantic menhaden (*Brevoortia tyrannus*) | [Commons](https://commons.wikimedia.org/wiki/File:Brevoortia_tyrannus_(S0605)_(12599879985).jpg) | Smithsonian Environmental Research Center | CC BY 2.0 |
-| `dogfish.jpg` | Spiny dogfish (*Squalus acanthias*) | [Commons](https://commons.wikimedia.org/wiki/File:Squalus_acanthias2.jpg) | NOAA Alaska Fisheries Science Center | Public domain |
+| `dogfish.jpg` | Spiny dogfish (*Squalus acanthias*) | [Commons](https://commons.wikimedia.org/wiki/File:Ecomare_-_doornhaai_(doornhaai-814-sw).jpg) | Ecomare / Salko de Wolf | CC BY-SA 4.0 |
 
 ## Recipe photos (`assets/recipes/`)
 
