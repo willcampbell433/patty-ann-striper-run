@@ -12,8 +12,9 @@ export const TRIP = {
   slug: "patty-ann-2026-11-07",
   title: "The Patty Ann",
   date: "2026-11-07",
-  // Approximate. Confirm with Capt. Greg and change this one line.
-  departureIso: "2026-11-07T07:00:00-05:00",
+  // Estimate only: the crew was already underway before 6:40 AM. Confirm the real
+  // time with Capt. Greg and change this one line; the trip clock follows it.
+  departureIso: "2026-11-07T06:30:00-05:00",
   dayEndIso: "2026-11-08T00:00:00-05:00",
   boat: "Patty Ann",
   boatDetail: "Patty Ann Charters, Captree State Park",
