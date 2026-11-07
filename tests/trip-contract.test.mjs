@@ -294,8 +294,11 @@ test("seed log entries sort before anything logged on the water", async () => {
 
   const dayStart = new Date(`${TRIP.date}T00:00:00-05:00`);
   const departure = new Date(TRIP.departureIso);
-  const seedStamps = [...migration.matchAll(/'(2026-11-07T\d{2}:\d{2}:\d{2}Z)'/g)].map((m) => new Date(m[1]));
-  assert.ok(seedStamps.length > 0, "the migration should seed timestamped rows");
+  // Only the log entries matter for ordering, so scope to that insert.
+  const entryInsert = migration.match(/insert into public\.trip_log_entries[\s\S]*$/);
+  assert.ok(entryInsert, "the migration should seed log entries");
+  const seedStamps = [...entryInsert[0].matchAll(/'(2026-11-07T\d{2}:\d{2}:\d{2}Z)'/g)].map((m) => new Date(m[1]));
+  assert.ok(seedStamps.length > 0, "the migration should seed timestamped log rows");
   seedStamps.forEach((stamp) => {
     assert.ok(stamp >= dayStart, `seed ${stamp.toISOString()} predates the trip day`);
     assert.ok(

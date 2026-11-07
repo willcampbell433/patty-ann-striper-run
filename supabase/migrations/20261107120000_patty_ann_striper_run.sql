@@ -209,7 +209,7 @@ values (
   'patty-ann-2026-11-07',
   'The Patty Ann',
   '2026-11-07',
-  '2026-11-07T12:00:00Z'
+  '2026-11-07T05:00:00Z'
 )
 on conflict (id) do nothing;
 
@@ -219,7 +219,7 @@ values (
   'underway',
   'Democrat Point',
   'Back at Captree, exact time TBD',
-  '2026-11-07T12:00:00Z'
+  '2026-11-07T05:00:00Z'
 )
 on conflict (trip_id) do nothing;
 
