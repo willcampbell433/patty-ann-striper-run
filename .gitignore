@@ -6,3 +6,5 @@ shared-config.js
 .vercel/
 .supabase/
 supabase/.temp/
+.vercel
+.env*
