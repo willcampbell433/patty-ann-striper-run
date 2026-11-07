@@ -265,9 +265,45 @@ test("the species guide covers only what was actually in play, with real photos"
   );
 });
 
-test("every species photo the page requests exists on disk and is credited", async () => {
+
+test("every recipe lists measured ingredients and credits its photo", async () => {
+  const html = await read("index.html");
+  const section = html.slice(html.indexOf('class="canyon-intel recipe-grid"'), html.indexOf('Handling it, from boat to pan'));
+  const cards = [...section.matchAll(/<h3>([^<]+)<\/h3>/g)].map((m) => m[1]);
+  assert.ok(cards.length >= 4, `expected the recipe cards, found ${cards.length}`);
+
+  const ingredientLists = [...section.matchAll(/<ul class="ingredients">([\s\S]*?)<\/ul>/g)];
+  assert.equal(ingredientLists.length, cards.length, "every recipe needs an ingredient list");
+  ingredientLists.forEach((list, index) => {
+    const items = [...list[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) => m[1]);
+    assert.ok(items.length >= 5, `${cards[index]} has only ${items.length} ingredients`);
+    // A quantity is the whole point: a cup, a spoon, a weight, or a count.
+    const measured = items.filter((item) => /\d|\bjuice of\b/.test(item));
+    assert.ok(
+      measured.length >= items.length - 1,
+      `${cards[index]} lists ingredients without quantities`,
+    );
+  });
+
+  assert.equal(
+    [...section.matchAll(/<img class="recipe-photo" src="assets\/recipes\/[a-z-]+\.jpg" alt="[^"]{20,}"/g)].length,
+    cards.length,
+    "every recipe needs a photo with real alt text",
+  );
+  assert.equal(
+    [...section.matchAll(/<small class="recipe-credit">/g)].length,
+    cards.length,
+    "every recipe photo must credit its source",
+  );
+  assert.ok(
+    /not our fish/i.test(html),
+    "the page must say the dish photos are not photographs of this trip's fish",
+  );
+});
+
+test("every bundled image the page requests exists on disk and is credited", async () => {
   const { readFile, stat } = await import("node:fs/promises");
-  const [html, credits] = await Promise.all([read("index.html"), read("assets/species/CREDITS.md")]);
+  const [html, credits] = await Promise.all([read("index.html"), read("assets/CREDITS.md")]);
   const sources = [...html.matchAll(/src="(assets\/[^"]+)"/g)].map((m) => m[1]);
   assert.ok(sources.length > 0, "expected species photos");
   for (const src of sources) {

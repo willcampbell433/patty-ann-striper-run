@@ -854,6 +854,44 @@ small {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.recipe-note {
+  grid-column: 1 / -1;
+  margin: 0 0 14px;
+  color: var(--muted, #8fa6b8);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.recipe-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 4px);
+  margin-bottom: 14px;
+}
+
+.canyon-intel .ingredients {
+  margin: 0 0 14px;
+  padding: 14px 16px 14px 32px;
+  border-left: 3px solid var(--accent, #ff8d4d);
+  border-radius: 0 calc(var(--radius) - 6px) calc(var(--radius) - 6px) 0;
+  background: rgba(255, 255, 255, 0.04);
+  list-style: disc;
+}
+
+.canyon-intel .ingredients li {
+  margin: 0 0 4px;
+}
+
+.recipe-credit {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted, #7b8b99);
+  font-size: 0.7rem;
+}
+
 .canyon-intel article {
   padding: 18px;
   border: 1px solid rgba(109, 244, 212, 0.16);
