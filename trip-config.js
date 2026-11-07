@@ -38,7 +38,7 @@ export const TRIP = {
  */
 export const CREW = [
   { name: "Bruce", role: "Trip organizer", note: "Will's dad. Put the whole thing together, booked the boat, and wrote the briefing. Chief morale officer." },
-  { name: "Will", role: "Lookout / Trip Log", note: "Watching for birds, bait, and blitzes, then calling it out fast. Also on photos and this board." },
+  { name: "Will", role: "Trip Log / Photos", note: "Bruce's son and the tech guy of the outfit. Helped his dad organize the trip, shot the photos, and built this page." },
   { name: "Tom", role: "Deck", note: "Played lacrosse with Bruce back in the day. Has his own boat, so he knows exactly where the fish aren't." },
   { name: "Dennis", role: "Mr. Excitement", note: "Lifelong fisherman, now a Hobie fishing kayak guy. Also tutored Will for the SATs, so he has already made him suffer once. Caught the first striped bass of his life today and then went high hook with three. The nickname earned itself." },
   { name: "Jon", role: "Deck", note: "Another one from the old lacrosse crew. Made the trip down from the North Shore." },
