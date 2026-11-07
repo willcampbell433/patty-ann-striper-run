@@ -1287,7 +1287,7 @@ small {
 
 .species-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
 
@@ -1850,17 +1850,38 @@ option {
 
 /* ---------- Patty Ann additions ---------- */
 
-/* Striped bass primer: the long-form species overview above the card grid. */
-.striper-primer {
+/* Striped bass gets the long-form treatment inside the same card grid. */
+.species-card.lead {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
   gap: 28px;
   padding: 28px;
-  margin-bottom: 28px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+}
+
+.species-card.lead span em {
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.species-card.lead p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.62;
+}
+
+.species-card.lead .species-lead-side {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.species-card.lead .species-lead-side ul {
+  margin-top: 0;
 }
 
 .striper-primer-copy small {
@@ -1961,7 +1982,7 @@ svg.species-art {
 }
 
 @media (max-width: 900px) {
-  .striper-primer {
+  .species-card.lead {
     grid-template-columns: minmax(0, 1fr);
     padding: 20px;
   }

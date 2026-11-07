@@ -242,10 +242,13 @@ test("the striped bass rules on the page match the May 12 2026 DEC revision", as
 
 test("the species guide covers only what was actually in play, with real photos", async () => {
   const html = await read("index.html");
-  const cards = [...html.matchAll(/<article class="species-card ([a-z]+)">/g)].map((m) => m[1]);
+  const cards = [...html.matchAll(/<article class="species-card ([a-z]+)(?: lead)?">/g)].map((m) => m[1]);
   // Will's call: striped bass is the target, bunker was the bait, dogfish were the only
   // thing biting on it. Nothing else belongs on a recap of this trip.
   assert.deepEqual(cards, ["striper", "bunker", "dogfish"]);
+  // One block per fish: the long striper write-up lives inside the striper card, not in a
+  // second section above the grid.
+  assert.ok(!html.includes("striper-primer\""), "the striper primer must stay folded into its card");
   assert.ok(!/species-card bluefish|species-card albie|species-card blackfish|species-card seabass/.test(html),
     "species that never showed up should not be on the page");
 

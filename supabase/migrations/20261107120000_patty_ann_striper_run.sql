@@ -412,7 +412,7 @@ values
     'Striped bass',
     'Trolling',
     'Jon',
-    'Jon gets his, and it is a good fish.',
+    'Jon gets his, and it is the first striped bass of his life too. Two men on this boat caught their first one inside the same hour.',
     '2026-11-07T05:15:00Z',
     '2026-11-07T05:15:00Z'
   ),
