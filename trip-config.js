@@ -63,7 +63,7 @@ export const POINTS = {
     lat: 40.6333,
     lon: -73.2933,
     label: "Democrat Point",
-    note: "West side of the inlet mouth. Rips, moving sand, and bass sitting in the current on a dropping tide.",
+    note: "First drop, 6:30 AM. Birds diving but no fish in 15 minutes. Rips and moving sand; worth another look on a different tide stage.",
   },
   lighthouseBeach: {
     key: "lighthouseBeach",
@@ -104,15 +104,17 @@ export const POINTS = {
 
 /**
  * The day's working track, in order, drawn as the line on the chart.
- * Updated 7:30 AM: the boat ran west out of the inlet to Jones Beach and is
- * working the beachfront back east, so the westward leg is now part of the run.
+ *
+ * As run: out the inlet, first drop at Democrat Point at 6:30, then a westward
+ * run down the beachfront as far as Jones Beach by 7:30, now working back east
+ * through Gilgo. The Lighthouse beachfront and the reef are still ahead.
  */
 export const ROUTE_KEYS = [
   "captree",
   "fireIslandInlet",
+  "democratPoint",
   "jonesBeach",
   "gilgoBeachfront",
-  "democratPoint",
   "lighthouseBeach",
   "fireIslandReef",
 ];

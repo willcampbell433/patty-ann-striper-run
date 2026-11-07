@@ -63,6 +63,12 @@ const seedEntries = [
     moment: "Striped bass: 28 to under 31 inch slot, one fish per person, inline circle hooks when fishing bait. Everything else goes back.",
   },
   {
+    time: "Nov 7, 6:30 AM",
+    type: "Mark",
+    method: "Jigging",
+    moment: "First drop of the day off Democrat Point. Birds diving over the rips but nothing underneath them. Pulled up after 15 minutes and ran the beachfront west.",
+  },
+  {
     time: "Nov 7, 7:30 AM",
     type: "Mark",
     method: "Running",
@@ -148,6 +154,18 @@ function formatTripStatus(status) {
 
 function isCatchType(type) {
   return CATCH_TYPES.includes(type);
+}
+
+/**
+ * Zero fish does not mean zero effort. Once the boat has actually fished, the
+ * scoreboard should say so rather than claiming lines are still not in.
+ */
+function tripStatusLabel(catchCount) {
+  if (catchCount > 0) return "Fish on the deck";
+  const status = els.tripStatusControl?.value;
+  if (status === "pre-departure" || new Date() < departure) return "Lines not in yet";
+  if (status === "recap") return "Skunked, but we were out there";
+  return "Still hunting";
 }
 
 function updateCatchDetailsVisibility() {
@@ -238,7 +256,7 @@ function renderTimeline(entries = activeEntries()) {
   const catchCount = entries.filter((entry) => isCatchType(entryType(entry))).length;
   els.catchCount.textContent = String(catchCount);
   els.lastUpdate.textContent = entries.length ? entryTime(entries.at(-1)) : "Stand by";
-  els.replacementGrade.textContent = catchCount > 0 ? "Fish on the deck" : "Lines not in yet";
+  els.replacementGrade.textContent = tripStatusLabel(catchCount);
   renderTally(entries);
 }
 

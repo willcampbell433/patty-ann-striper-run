@@ -263,12 +263,23 @@ values
   (
     'a7770000-0000-4000-8000-000000000104',
     'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 6:30 AM',
+    'Mark',
+    'Jigging',
+    null,
+    'First drop of the day off Democrat Point. Birds diving over the rips but nothing underneath them. Pulled up after 15 minutes and ran the beachfront west.',
+    '2026-11-07T05:03:00Z',
+    '2026-11-07T05:03:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000105',
+    'a7770000-0000-4000-8000-000000000001',
     'Nov 7, 7:30 AM',
     'Mark',
     'Running',
     null,
     'Passed Jones Beach about half a mile off the sand, still cruising east. Working the beachfront back toward Gilgo and the inlet.',
-    '2026-11-07T05:03:00Z',
-    '2026-11-07T05:03:00Z'
+    '2026-11-07T05:04:00Z',
+    '2026-11-07T05:04:00Z'
   )
 on conflict (id) do nothing;
