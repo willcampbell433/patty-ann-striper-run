@@ -221,7 +221,7 @@ values (
   'a7770000-0000-4000-8000-000000000001',
   'fishing',
   'Home',
-  'Two stripers outside Democrat Point: Bruce 30" in the slot at 11:00 AM, Dennis 36" released at 11:20 AM.',
+  'Six bass outside Democrat Point. Dennis 3, Bruce 2, Jon 1. Two inside the slot, four too big.',
   '2026-11-07T05:00:00Z'
 )
 on conflict (trip_id) do nothing;
@@ -360,5 +360,71 @@ values
     'Dennis on the board twenty minutes later, and it is the first striped bass of his life. Too big for the slot so it went back, but it fought him the whole way. (36")',
     '2026-11-07T05:11:00Z',
     '2026-11-07T05:11:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000010d',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, next run',
+    'Mark',
+    'Running',
+    null,
+    'Another run through the same water outside Democrat Point, and this one was massive. Four more bass in the boat.',
+    '2026-11-07T05:12:00Z',
+    '2026-11-07T05:12:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000010e',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, next run',
+    'Striped bass',
+    'Trolling',
+    'Dennis',
+    'Dennis right back on the board. Second bass of the day for a guy who had never caught one before today.',
+    '2026-11-07T05:13:00Z',
+    '2026-11-07T05:13:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000010f',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, next run',
+    'Striped bass',
+    'Trolling',
+    'Dennis',
+    'And again. Three for Dennis, high hook on the Patty Ann.',
+    '2026-11-07T05:14:00Z',
+    '2026-11-07T05:14:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000110',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, next run',
+    'Striped bass',
+    'Trolling',
+    'Jon',
+    'Jon gets his, and it is a good fish.',
+    '2026-11-07T05:15:00Z',
+    '2026-11-07T05:15:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000111',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, next run',
+    'Striped bass',
+    'Trolling',
+    'Bruce',
+    'Bruce adds his second of the day. Boat total is six bass, two of them inside the slot and the rest too big to keep.',
+    '2026-11-07T05:16:00Z',
+    '2026-11-07T05:16:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000112',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, next run',
+    'Boat life',
+    'Other',
+    null,
+    'Cameras out for this one. Finally some fish worth photographing.',
+    '2026-11-07T05:17:00Z',
+    '2026-11-07T05:17:00Z'
   )
 on conflict (id) do nothing;

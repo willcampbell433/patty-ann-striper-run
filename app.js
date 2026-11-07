@@ -7,6 +7,7 @@ import {
   DEFAULT_DESTINATION,
   SOURCES,
   CATCH_TYPES,
+  SEED_ENTRIES,
 } from "./trip-config.js";
 
 const departure = new Date(TRIP.departureIso);
@@ -47,82 +48,7 @@ const weatherFallback = {
   },
 };
 
-const seedEntries = [
-  {
-    time: "Nov 7, dock",
-    type: "Boat life",
-    method: "Dockside",
-    moment: "Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, Jon, and Don. Capt. Greg running it, AJ on the deck.",
-  },
-  {
-    time: "Nov 7, plan",
-    type: "Boat life",
-    method: "Running",
-    moment: "Out Fire Island Inlet and west along the ocean beachfront. Fall run, so the bait decides where we stop.",
-  },
-  {
-    time: "Nov 7, before lines in",
-    type: "Boat life",
-    method: "Other",
-    moment: "Striped bass: 28 to under 31 inch slot, one fish per person, inline circle hooks when fishing bait. Everything else goes back.",
-  },
-  {
-    time: "Nov 7, 6:30 AM",
-    type: "Mark",
-    method: "Jigging",
-    moment: "First drop of the day off Democrat Point. Birds diving over the rips but nothing underneath them. Pulled up after 15 minutes and ran the beachfront west.",
-  },
-  {
-    time: "Nov 7, 7:30 AM",
-    type: "Mark",
-    method: "Running",
-    moment: "Passed Jones Beach about half a mile off the sand, heading west down the beachfront.",
-  },
-  {
-    time: "Nov 7, 7:38 AM",
-    type: "Mark",
-    method: "Running",
-    moment: "Off Jones Inlet between Point Lookout and the Jones Beach west end, still running west. About 15 nm from Captree with an 11:00 AM return.",
-  },
-  {
-    time: "Nov 7, ~8:20 AM",
-    type: "Mark",
-    method: "Jigging",
-    moment: "Second stop, off Long Beach. Rods down 20 to 30 minutes with no hits on the jigs, but the bunker were thick and we snagged five or six live ones.",
-  },
-  {
-    time: "Nov 7, ~8:40 AM",
-    type: "Boat life",
-    method: "Live bait",
-    moment: "Three live bunker in the water. Couple of dogfish bites and nothing else, so the bass are not under this bait.",
-  },
-  {
-    time: "Nov 7, 8:52 AM",
-    type: "Mark",
-    method: "Running",
-    moment: "Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.",
-  },
-  {
-    time: "Nov 7, back east",
-    type: "Mark",
-    method: "Running",
-    moment: "Ran the whole way back east and set up just outside Democrat Point, ocean side of the inlet. Boats everywhere. Found where everyone is.",
-  },
-  {
-    time: "Nov 7, 11:00 AM",
-    type: "Striped bass",
-    method: "Trolling",
-    angler: "Bruce",
-    moment: "First fish in the boat. Bruce on the bunker spoon, and it measured right inside the slot. (30\")",
-  },
-  {
-    time: "Nov 7, 11:20 AM",
-    type: "Striped bass",
-    method: "Trolling",
-    angler: "Dennis",
-    moment: "Dennis on the board twenty minutes later, and it is the first striped bass of his life. Too big for the slot so it went back, but it fought him the whole way. (36\")",
-  },
-];
+const seedEntries = SEED_ENTRIES;
 
 const tideFallback = SOURCES.tideFallback;
 

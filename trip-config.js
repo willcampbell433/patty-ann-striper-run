@@ -111,7 +111,7 @@ export const POINTS = {
     lat: 40.6225,
     lon: -73.295,
     label: "Outside Democrat Point",
-    note: "Third stop, and the one that produced. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released.",
+    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. The next run through was massive: four more bass, for a boat total of six. Two of the six were inside the slot, the rest too big.",
   },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
@@ -136,7 +136,8 @@ export const POINTS = {
  * Point at 6:30, then down the ocean beachfront past Gilgo and Jones Beach to
  * Jones Inlet at 7:38 and Long Beach by 8:20. Turned around at 8:52, ran the
  * whole way back east, and set up just outside Democrat Point, where the fleet
- * was. That is where the fish were: two stripers between 11:00 and 11:20.
+ * was. That is where the fish were: two stripers between 11:00 and 11:20, then
+ * four more on the next run through. Six bass total, two inside the slot.
  *
  * The Lighthouse beachfront and Fire Island Reef sit east of the inlet and were
  * not part of today's run. They stay pinned as references, not on the track.
@@ -189,6 +190,130 @@ export const SOURCES = {
     { t: "2026-11-07 17:38", type: "H" },
   ],
 };
+
+/**
+ * The log entries the board starts with, in order.
+ *
+ * These are duplicated as seeded rows in the Supabase migration so the shared
+ * board and a local-only device show the same log. `tests/trip-contract.test.mjs`
+ * asserts the two stay identical; they drifted once already.
+ */
+export const SEED_ENTRIES = [
+  {
+    time: "Nov 7, dock",
+    type: "Boat life",
+    method: "Dockside",
+    moment: "Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, Jon, and Don. Capt. Greg running it, AJ on the deck.",
+  },
+  {
+    time: "Nov 7, plan",
+    type: "Boat life",
+    method: "Running",
+    moment: "Out Fire Island Inlet and west along the ocean beachfront. Fall run, so the bait decides where we stop.",
+  },
+  {
+    time: "Nov 7, before lines in",
+    type: "Boat life",
+    method: "Other",
+    moment: "Striped bass: 28 to under 31 inch slot, one fish per person, inline circle hooks when fishing bait. Everything else goes back.",
+  },
+  {
+    time: "Nov 7, 6:30 AM",
+    type: "Mark",
+    method: "Jigging",
+    moment: "First drop of the day off Democrat Point. Birds diving over the rips but nothing underneath them. Pulled up after 15 minutes and ran the beachfront west.",
+  },
+  {
+    time: "Nov 7, 7:30 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Passed Jones Beach about half a mile off the sand, heading west down the beachfront.",
+  },
+  {
+    time: "Nov 7, 7:38 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Off Jones Inlet between Point Lookout and the Jones Beach west end, still running west. About 15 nm from Captree with an 11:00 AM return.",
+  },
+  {
+    time: "Nov 7, ~8:20 AM",
+    type: "Mark",
+    method: "Jigging",
+    moment: "Second stop, off Long Beach. Rods down 20 to 30 minutes with no hits on the jigs, but the bunker were thick and we snagged five or six live ones.",
+  },
+  {
+    time: "Nov 7, ~8:40 AM",
+    type: "Boat life",
+    method: "Live bait",
+    moment: "Three live bunker in the water. Couple of dogfish bites and nothing else, so the bass are not under this bait.",
+  },
+  {
+    time: "Nov 7, 8:52 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.",
+  },
+  {
+    time: "Nov 7, back east",
+    type: "Mark",
+    method: "Running",
+    moment: "Ran the whole way back east and set up just outside Democrat Point, ocean side of the inlet. Boats everywhere. Found where everyone is.",
+  },
+  {
+    time: "Nov 7, 11:00 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Bruce",
+    moment: "First fish in the boat. Bruce on the bunker spoon, and it measured right inside the slot. (30\")",
+  },
+  {
+    time: "Nov 7, 11:20 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Dennis",
+    moment: "Dennis on the board twenty minutes later, and it is the first striped bass of his life. Too big for the slot so it went back, but it fought him the whole way. (36\")",
+  },
+  {
+    time: "Nov 7, next run",
+    type: "Mark",
+    method: "Running",
+    moment: "Another run through the same water outside Democrat Point, and this one was massive. Four more bass in the boat.",
+  },
+  {
+    time: "Nov 7, next run",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Dennis",
+    moment: "Dennis right back on the board. Second bass of the day for a guy who had never caught one before today.",
+  },
+  {
+    time: "Nov 7, next run",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Dennis",
+    moment: "And again. Three for Dennis, high hook on the Patty Ann.",
+  },
+  {
+    time: "Nov 7, next run",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Jon",
+    moment: "Jon gets his, and it is a good fish.",
+  },
+  {
+    time: "Nov 7, next run",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Bruce",
+    moment: "Bruce adds his second of the day. Boat total is six bass, two of them inside the slot and the rest too big to keep.",
+  },
+  {
+    time: "Nov 7, next run",
+    type: "Boat life",
+    method: "Other",
+    moment: "Cameras out for this one. Finally some fish worth photographing.",
+  },
+];
 
 export const LOG_TYPES = ["Boat life", "Striped bass", "Bluefish", "False albacore", "Blackfish", "Black sea bass", "Weather", "Mark", "Quote"];
 

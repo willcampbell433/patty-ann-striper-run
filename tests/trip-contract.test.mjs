@@ -13,6 +13,7 @@ import {
   CATCH_TYPES,
   LOG_TYPES,
   METHODS,
+  SEED_ENTRIES,
 } from "../trip-config.js";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
@@ -330,6 +331,47 @@ test("seed log entries sort before anything logged on the water", async () => {
       stamp <= departure,
       `seed ${stamp.toISOString()} is after departure, so real entries would sort above it`,
     );
+  });
+});
+
+test("the client seeds and the migration seeds are the same log", async () => {
+  // Regression: the Jon/Don correction and the 8:20/8:40/8:52 entries landed in
+  // app.js only, so the shared board would have served a stale, shorter log.
+  const migration = await read(migrationPath);
+  const insert = migration.match(/insert into public\.trip_log_entries[\s\S]*?on conflict/);
+  assert.ok(insert, "the migration should seed log entries");
+
+  const rows = [...insert[0].matchAll(/\(\s*'[0-9a-f-]{36}',\s*'[0-9a-f-]{36}',\s*([\s\S]*?)\s*\),?\s*(?=\(|on conflict)/g)];
+  assert.equal(rows.length, SEED_ENTRIES.length, "the migration seeds a different number of entries than the client");
+
+  const unquote = (value) => {
+    const trimmed = value.trim();
+    if (trimmed === "null") return null;
+    assert.match(trimmed, /^'[\s\S]*'$/, `unexpected SQL literal: ${trimmed}`);
+    return trimmed.slice(1, -1).replaceAll("''", "'");
+  };
+
+  rows.forEach((row, index) => {
+    // time_label, entry_type, method, angler, moment, created_at, updated_at
+    const fields = row[1].split(/,\n\s*/).map(unquote);
+    const [timeLabel, entryType, method, angler, moment] = fields;
+    const seed = SEED_ENTRIES[index];
+    assert.equal(timeLabel, seed.time, `seed ${index} time_label differs`);
+    assert.equal(entryType, seed.type, `seed ${index} entry_type differs`);
+    assert.equal(method, seed.method, `seed ${index} method differs`);
+    assert.equal(angler, seed.angler ?? null, `seed ${index} angler differs`);
+    assert.equal(moment, seed.moment, `seed ${index} moment differs`);
+  });
+});
+
+test("seeded anglers are real crew members so the standings add up", () => {
+  const names = new Set(CREW.map((member) => member.name));
+  SEED_ENTRIES.forEach((seed, index) => {
+    if (!seed.angler) return;
+    assert.ok(names.has(seed.angler), `seed ${index} credits "${seed.angler}", who is not aboard`);
+  });
+  SEED_ENTRIES.filter((seed) => CATCH_TYPES.includes(seed.type)).forEach((seed, index) => {
+    assert.ok(seed.angler, `catch seed ${index} has no angler, so it would not reach the standings`);
   });
 });
 
