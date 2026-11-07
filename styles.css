@@ -1265,7 +1265,8 @@ small {
   box-sizing: border-box;
 }
 
-/* The dogfish shot is a real underwater photo, so it fills rather than floats. */
+/* The striper and dogfish shots are real photos, so they fill rather than float. */
+.species-card.striper .species-photo,
 .species-card.dogfish .species-photo {
   object-fit: cover;
   padding: 0;
