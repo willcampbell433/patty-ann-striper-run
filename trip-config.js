@@ -109,7 +109,7 @@ export const POINTS = {
     lat: 40.58,
     lon: -73.656,
     label: "Long Beach",
-    note: "Second stop and the westernmost point of the day, about 8:20 AM. Rods down 20 to 30 minutes with no hits, but the bunker were thick: five or six snagged live, three put in the water. Only dogfish bites. Turned east at 8:52.",
+    note: "Second stop and the westernmost point of the day, about 8:20 AM. Rods down 20 to 30 minutes with no hits, but the bunker were thick: five or six snagged live, three put in the water. Only dogfish bites. This is where the trip turned: Pete was texting Bruce from his own boat and Greg was getting calls from his buddies, all reporting fish back east outside Fire Island Inlet. Turned east at 8:52."
   },
   // Final stop of the day and the only one that produced. Will marked it on the
   // chart himself: ocean side, just outside Fire Island Inlet, south and west of
@@ -262,7 +262,7 @@ export const SEED_ENTRIES = [
     time: "Nov 7, 8:52 AM",
     type: "Mark",
     method: "Running",
-    moment: "Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.",
+    moment: "Turned around and running back east, on word of mouth. Pete, a friend of Bruce's fishing his own center console Robalo, had been texting him at Long Beach to say the fish were where he was. Greg was getting the same thing by phone from his own buddies: the bass are back east, outside Fire Island Inlet. The whole fleet hurried back there at once.",
   },
   {
     time: "Nov 7, back east",

@@ -324,7 +324,7 @@ values
     'Mark',
     'Running',
     null,
-    'Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.',
+    'Turned around and running back east, on word of mouth. Pete, a friend of Bruce''s fishing his own center console Robalo, had been texting him at Long Beach to say the fish were where he was. Greg was getting the same thing by phone from his own buddies: the bass are back east, outside Fire Island Inlet. The whole fleet hurried back there at once.',
     '2026-11-07T05:08:00Z',
     '2026-11-07T05:08:00Z'
   ),
