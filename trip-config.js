@@ -16,6 +16,11 @@ export const TRIP = {
   // crew aboard by 5:30. The trip clock and the turn-for-home timing follow these.
   departureIso: "2026-11-07T06:00:00-05:00",
   returnByIso: "2026-11-07T11:00:00-05:00",
+  // Actual time back at the dock. Greg stayed out well past the booked 11:00
+  // return because the fish finally turned on at 11:00, so the real trip ran
+  // 6:00 AM to 12:30 PM: 6.5 hours. The trip clock freezes here instead of
+  // counting up all day.
+  dockedIso: "2026-11-07T12:30:00-05:00",
   boardingIso: "2026-11-07T05:30:00-05:00",
   dayEndIso: "2026-11-08T00:00:00-05:00",
   boat: "Patty Ann",
@@ -367,10 +372,10 @@ export const SEED_ENTRIES = [
     moment: "Mr. Excitement accepts the title. Dennis, high hook with three: \"As we say on the soccer field, it's excitement time.\"",
   },
   {
-    time: "Nov 7, 12:45 PM",
+    time: "Nov 7, 12:30 PM",
     type: "Boat life",
     method: "Dockside",
-    moment: "Tied up, fish cleaned and split, and everybody is driving home with a bag. Six guys, six fish caught, nobody skunked, and three keepers in the slot to divide up. Everyone is happy. That is the whole trip.",
+    moment: "Back at the dock at 12:30, an hour and a half past the booked 11:00 return. Fish cleaned and split, and everybody drove home with a bag. Six hours and thirty minutes, nine bass, three keepers in the slot, every man on the board. Everyone is happy. That is the whole trip.",
   },
 ];
 

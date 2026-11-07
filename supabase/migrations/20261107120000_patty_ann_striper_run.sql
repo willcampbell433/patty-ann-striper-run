@@ -518,11 +518,11 @@ values
   (
     'a7770000-0000-4000-8000-00000000011b',
     'a7770000-0000-4000-8000-000000000001',
-    'Nov 7, 12:45 PM',
+    'Nov 7, 12:30 PM',
     'Boat life',
     'Dockside',
     null,
-    'Tied up, fish cleaned and split, and everybody is driving home with a bag. Six guys, six fish caught, nobody skunked, and three keepers in the slot to divide up. Everyone is happy. That is the whole trip.',
+    'Back at the dock at 12:30, an hour and a half past the booked 11:00 return. Fish cleaned and split, and everybody drove home with a bag. Six hours and thirty minutes, nine bass, three keepers in the slot, every man on the board. Everyone is happy. That is the whole trip.',
     '2026-11-07T05:26:00Z',
     '2026-11-07T05:26:00Z'
   )

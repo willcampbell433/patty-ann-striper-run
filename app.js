@@ -14,7 +14,8 @@ const departure = new Date(TRIP.departureIso);
 const returnBy = new Date(TRIP.returnByIso);
 // Used only when the GPS has not produced a usable speed yet.
 const ASSUMED_CRUISE_KT = 20;
-const tripDayEnd = new Date(TRIP.dayEndIso);
+// The boat is in. The clock stops at the real dock time and stays there.
+const docked = new Date(TRIP.dockedIso);
 const storageKey = `${TRIP.slug}-log-v1`;
 
 const route = ROUTE_KEYS.map((key) => POINTS[key]);
@@ -171,12 +172,13 @@ function renderTimer() {
   const now = new Date();
   let diff = departure - now;
 
-  if (now >= departure && now < tripDayEnd) {
+  if (now >= docked) {
+    // Trip is over. Hold the final elapsed time, 6:00 AM to 12:30 PM.
+    els.missionStatus.textContent = "Trip complete";
+    diff = docked - departure;
+  } else if (now >= departure) {
     els.missionStatus.textContent = "Time underway";
     diff = now - departure;
-  } else if (now >= tripDayEnd) {
-    els.missionStatus.textContent = "Recap mode";
-    diff = 0;
   } else {
     els.missionStatus.textContent = "Pre-departure";
   }
