@@ -1,0 +1,11 @@
+{
+  "name": "patty-ann-striper-run",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check app.js && node --check trip-config.js && node --check shared-store.js && node --check photo-utils.js && node --check scripts/generate-shared-config.mjs",
+    "build": "npm test && npm run check && node scripts/generate-shared-config.mjs",
+    "serve": "python3 -m http.server 4173 --bind 127.0.0.1"
+  }
+}

@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="The Patty Ann striped bass trip board for November 7, 2026. Live GPS tracker, route chart out Fire Island Inlet, marine weather, tides, crew, striper regulations, species guide, and trip log."
+    />
+    <title>The Patty Ann | Nov 7 Striper Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sea-grid" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="The Patty Ann striper run home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 48 48" role="img" aria-label="Striped bass icon">
+            <path
+              d="M5.5 24c7.8-8.2 18.2-11.2 31.3-9l6-5.7v11.1l-6.1 4.1 6.1 4.1v10.1l-6-5.4C23.7 36.1 13.3 33.1 5.5 24Z"
+            />
+            <circle cx="31.8" cy="20.6" r="1.8" />
+          </svg>
+        </span>
+        <span>The Patty Ann</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#tracker">Live GPS</a>
+        <a href="#map">Map</a>
+        <a href="#weather">Weather</a>
+        <a href="#crew">Crew</a>
+        <a href="#species">Fish</a>
+        <a href="#log">Log</a>
+        <a href="#rules">Rules</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="wave-band" aria-hidden="true">
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path
+              class="wave wave-1"
+              d="M0,64 C240,96 480,32 720,56 C960,80 1200,40 1440,64 L1440,120 L0,120 Z"
+            />
+            <path
+              class="wave wave-2"
+              d="M0,80 C240,56 480,104 720,84 C960,64 1200,96 1440,76 L1440,120 L0,120 Z"
+            />
+          </svg>
+        </div>
+        <div class="hero-copy">
+          <p class="signal">Captree to the ocean | Saturday, Nov 7, 2026</p>
+          <h1>Six aboard. Stripers ahead.</h1>
+          <p class="hero-text">
+            Bruce, Will, Tom, Dennis, John, and Donald are running the <em>Patty Ann</em> out of
+            Captree, through Fire Island Inlet, and into the ocean for the fall striped bass run.
+            Capt. Greg has the wheel, AJ has the deck. Live chart, live GPS, wind, waves, tides,
+            bite windows, fish standings, and the running story.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#tracker">Start the tracker</a>
+            <a class="secondary-action" href="#weather">Check conditions</a>
+          </div>
+        </div>
+
+        <section class="mission-panel" aria-label="Trip countdown">
+          <div class="panel-topline">
+            <span>Trip Clock</span>
+            <strong id="missionStatus">Pre-departure</strong>
+          </div>
+          <div class="timer-grid" aria-live="polite">
+            <div>
+              <span id="daysValue">00</span>
+              <small>days</small>
+            </div>
+            <div>
+              <span id="hoursValue">00</span>
+              <small>hrs</small>
+            </div>
+            <div>
+              <span id="minutesValue">00</span>
+              <small>min</small>
+            </div>
+          </div>
+          <div class="mission-stats">
+            <div>
+              <small>Depart</small>
+              <strong>Captree Boat Basin</strong>
+            </div>
+            <div>
+              <small>Ocean exit</small>
+              <strong>Fire Island Inlet</strong>
+            </div>
+            <div>
+              <small>Primary</small>
+              <strong>Striped bass</strong>
+            </div>
+            <div>
+              <small>Return</small>
+              <strong>Back at Captree, time TBD</strong>
+            </div>
+          </div>
+          <div class="boat-strip">
+            <span class="boat-icon" aria-hidden="true"></span>
+            <div>
+              <strong>Patty Ann — Patty Ann Charters, Captree</strong>
+              <small>Six passengers max. Capt. Greg Gargiulo, mate AJ. Jigging, trolling, and live bait.</small>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tracker-section section-shell" id="tracker" aria-labelledby="trackerHeading">
+        <div class="tracker-shell">
+          <div class="tracker-intro">
+            <div class="section-heading">
+              <span>Live GPS</span>
+              <h2 id="trackerHeading">Follow <em>Patty Ann</em></h2>
+            </div>
+            <p>
+              Tap start and this device's GPS plots the boat on the chart below, draws the trail as
+              we run, and gives distance and ETA to whichever spot is selected.
+            </p>
+            <p class="tracker-disclaimer">
+              For trip awareness only. Navigate with the boat's chartplotter and the captain's call.
+              Your position stays on your phone and is not published to anyone.
+            </p>
+          </div>
+          <div class="tracker-control">
+            <span class="location-state" id="locationState" data-state="off">GPS OFF</span>
+            <p id="locationStatus" aria-live="polite">Start live tracking to follow the boat on the chart.</p>
+            <label class="tracker-destination" for="destinationControl">
+              ETA destination
+              <select id="destinationControl" disabled>
+                <option>Fire Island Inlet</option>
+                <option selected>Democrat Point</option>
+                <option>Lighthouse beachfront</option>
+                <option>Fire Island Reef</option>
+                <option>Gilgo beachfront</option>
+                <option>Home</option>
+              </select>
+            </label>
+            <small class="destination-save-state" id="destinationSaveState" aria-live="polite">Shared with everyone.</small>
+            <button class="map-button" id="locateButton" type="button">Start live location</button>
+          </div>
+          <div class="tracker-readouts" role="group" aria-label="Live GPS readouts">
+            <article>
+              <small>Position + accuracy</small>
+              <strong id="positionReadout">Waiting for a GPS fix</strong>
+            </article>
+            <article>
+              <small>Speed + course</small>
+              <strong id="speedCourseReadout">Available once underway</strong>
+            </article>
+            <article>
+              <small>Distance + ETA</small>
+              <strong id="etaReadout">Available once tracking starts</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="map-section section-shell" id="map">
+        <div class="section-heading wide">
+          <span>The Run</span>
+          <h2>Interactive chart</h2>
+        </div>
+        <div class="map-layout">
+          <div class="map-panel">
+            <section id="leafletMap" aria-label="Trip route map"></section>
+          </div>
+          <aside class="map-notes" aria-label="Route notes">
+            <div>
+              <small>Departure</small>
+              <strong>Captree Boat Basin</strong>
+              <p>
+                3500 Ocean Parkway, Babylon. Out of the basin, under the Robert Moses Causeway, and
+                west toward the inlet. The captain times the inlet on the tide.
+              </p>
+            </div>
+            <div>
+              <small>Planned run distance</small>
+              <strong id="runDistance">Calculating…</strong>
+              <p>
+                Planning estimate only. This is a short inshore run, so most of the day is spent
+                working spots rather than covering ground. Fish and the captain decide the real timeline.
+              </p>
+            </div>
+            <div>
+              <small>Spots</small>
+              <strong>Inlet → Democrat Point → Lighthouse → Fire Island Reef</strong>
+              <p>
+                Gilgo beachfront is the westward backup if the bait pushes that way. It is pinned on
+                the chart but is not on the planned line.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="tools-grid section-shell" id="log">
+        <div class="log-panel trip-update-panel">
+          <div class="trip-update-heading">
+            <div class="section-heading">
+              <span>Trip Log</span>
+              <h2>Add trip update</h2>
+            </div>
+            <span class="sync-state" id="syncState" data-state="pending" aria-live="polite">Pending</span>
+          </div>
+          <div class="current-trip-summary" role="group" aria-label="Current trip status">
+            <div>
+              <small>Status</small>
+              <strong id="currentTripStatus">Underway</strong>
+            </div>
+            <div>
+              <small>Destination</small>
+              <strong id="currentTripDestination">Democrat Point</strong>
+            </div>
+            <div class="current-trip-note">
+              <small>Latest note</small>
+              <strong id="currentTripNote">Back at Captree, exact time TBD</strong>
+            </div>
+          </div>
+          <p class="trip-update-help">One save updates the live trip status and adds a timestamped entry to the Trip Log.</p>
+          <form id="tripUpdateForm" class="log-form" aria-label="Add trip update">
+            <label class="trip-update-text">
+              Update
+              <textarea id="tripUpdateInput" maxlength="500" rows="4" placeholder="Bass blitzing on peanut bunker off the point" required></textarea>
+            </label>
+            <label>
+              Status
+              <select id="tripStatusControl">
+                <option value="pre-departure">Pre-departure</option>
+                <option value="underway" selected>Underway</option>
+                <option value="fishing">Fishing</option>
+                <option value="heading-home">Heading home</option>
+                <option value="recap">Recap</option>
+              </select>
+            </label>
+            <label>
+              Type
+              <select id="typeInput">
+                <option selected>Boat life</option>
+                <option>Striped bass</option>
+                <option>Bluefish</option>
+                <option>False albacore</option>
+                <option>Blackfish</option>
+                <option>Black sea bass</option>
+                <option>Weather</option>
+                <option>Mark</option>
+                <option>Quote</option>
+              </select>
+            </label>
+            <div class="catch-details" id="catchDetails" hidden aria-hidden="true">
+              <label>
+                Method
+                <select id="methodInput">
+                  <option>Jigging</option>
+                  <option>Trolling</option>
+                  <option>Live bait</option>
+                  <option>Chunking</option>
+                  <option>Bottom</option>
+                  <option>Running</option>
+                  <option>Dockside</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label>
+                Angler
+                <select id="anglerInput">
+                  <option value="">Crew</option>
+                  <option>Bruce</option>
+                  <option>Will</option>
+                  <option>Tom</option>
+                  <option>Dennis</option>
+                  <option>John</option>
+                  <option>Donald</option>
+                </select>
+              </label>
+              <label>
+                Length (in)
+                <input id="lengthInput" type="number" min="1" max="80" step="0.5" placeholder="29" />
+              </label>
+              <p class="slot-hint" id="slotHint" hidden>
+                Keeper slot is 28 to under 31 inches, one fish per person. Everything outside that goes back.
+              </p>
+            </div>
+            <button class="primary-action full" id="saveTripUpdateButton" type="submit" disabled>Save to trip log</button>
+            <p class="sync-error" id="syncError" hidden></p>
+          </form>
+          <p class="official-log-note">
+            Capt. Greg's count is the official one. This board is public and collaborative, so anyone
+            with the link can add, edit, or delete entries.
+          </p>
+        </div>
+
+        <div class="timeline-panel">
+          <div class="section-heading">
+            <span>Timeline</span>
+            <h2>Trip log</h2>
+          </div>
+          <div class="crew-tally" role="group" aria-label="Fish standings">
+            <div class="leaderboard-header">
+              <small>Bruce vs Will vs Tom vs Dennis vs John vs Donald</small>
+              <strong>Striper Standings</strong>
+            </div>
+            <ul class="tally-list" id="crewTally"></ul>
+          </div>
+          <div class="log-metrics">
+            <div>
+              <small>Fish logged</small>
+              <strong id="catchCount">0</strong>
+            </div>
+            <div>
+              <small>Last update</small>
+              <strong id="lastUpdate">Stand by</strong>
+            </div>
+          </div>
+          <ol class="timeline" id="timelineList"></ol>
+        </div>
+      </section>
+
+      <section class="crew-section section-shell" id="crew">
+        <div class="section-heading wide">
+          <span>The roster</span>
+          <h2>Six aboard, plus the pros</h2>
+        </div>
+        <div class="crew-grid">
+          <article class="crew-card captain">
+            <span>Captain</span>
+            <h3>Greg</h3>
+            <p>Capt. Greg Gargiulo runs the Patty Ann out of Captree. His call is the only call that matters.</p>
+          </article>
+          <article class="crew-card guest">
+            <span>Mate</span>
+            <h3>AJ</h3>
+            <p>Rigging, gaffing, netting, and keeping six guys untangled. Tip the mate.</p>
+          </article>
+          <article class="crew-card">
+            <span>Dad</span>
+            <h3>Bruce</h3>
+            <p>The reason the six of us are on the water today. Chief morale officer.</p>
+          </article>
+          <article class="crew-card">
+            <span>Deck</span>
+            <h3>Tom</h3>
+            <p>Steady hands on the rail and a good read on where the fish went.</p>
+          </article>
+          <article class="crew-card">
+            <span>Deck</span>
+            <h3>Dennis</h3>
+            <p>Long-game angler. Will out-wait a slow bite and get paid for it.</p>
+          </article>
+          <article class="crew-card">
+            <span>Deck</span>
+            <h3>John</h3>
+            <p>Will have a bass on before anyone else finishes rigging.</p>
+          </article>
+          <article class="crew-card">
+            <span>Deck</span>
+            <h3>Donald</h3>
+            <p>Quietly outfishes everybody and says nothing about it.</p>
+          </article>
+          <article class="crew-card">
+            <span>Lookout / Trip Log</span>
+            <h3>Will</h3>
+            <p>Watching for birds, bait, and blitzes, then calling it out fast. Also on photos and this board.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="seafloor-section section-shell" id="grounds">
+        <section class="seafloor-panel" aria-label="Fishing grounds">
+          <div class="seafloor-copy">
+            <div class="section-heading">
+              <span>Grounds Reference</span>
+              <h2>Rips, bars, and reef</h2>
+            </div>
+            <p>
+              November out of Fire Island Inlet is fall-run fishing. Bass stage in the inlet rips and
+              along the ocean beachfront chasing bait moving west and south. Public references are on
+              the chart; the Patty Ann's electronics and Capt. Greg's judgment are the source of truth.
+            </p>
+            <a href="https://www.pattyannchartersny.com/" target="_blank" rel="noreferrer">
+              Patty Ann Charters
+            </a>
+            <a href="https://dec.ny.gov/things-to-do/saltwater-fishing/artificial-reefs/locations" target="_blank" rel="noreferrer">
+              DEC artificial reef locations
+            </a>
+            <a href="https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-fishing-regulations" target="_blank" rel="noreferrer">
+              DEC saltwater regulations
+            </a>
+            <a href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank" rel="noreferrer">
+              NDBC buoy 44025
+            </a>
+          </div>
+          <div class="spot-grid" role="group" aria-label="Fishing spots">
+            <article>
+              <small>The way out</small>
+              <strong>Fire Island Inlet</strong>
+              <span>Shifting shoals and serious current. Timed on the tide, not on a schedule.</span>
+            </article>
+            <article>
+              <small>Stop 1</small>
+              <strong>Democrat Point</strong>
+              <span>West side of the inlet mouth. Rips and moving sand, with bass holding in the current on a dropping tide.</span>
+            </article>
+            <article>
+              <small>Stop 2</small>
+              <strong>Lighthouse beachfront</strong>
+              <span>Ocean side east of the inlet, under the Fire Island Lighthouse. Work the bars and troughs.</span>
+            </article>
+            <article>
+              <small>Stop 3</small>
+              <strong>Fire Island Reef</strong>
+              <span>DEC artificial reef, 62 to 73 feet, 744 acres, 2.0 nm south of the lighthouse. Bass, blackfish, and sea bass on structure.</span>
+            </article>
+            <article>
+              <small>Backup</small>
+              <strong>Gilgo beachfront</strong>
+              <span>Ocean side west of the inlet. The run-and-gun option when the bait pushes west.</span>
+            </article>
+          </div>
+          <div class="canyon-intel" role="group" aria-label="Fall run intel">
+            <article>
+              <small>The pattern</small>
+              <h3>Follow the bait, not the clock</h3>
+              <p>
+                Fall stripers are migrating. They are wherever the peanut bunker, sand eels, and mullet
+                are, which changes day to day and sometimes hour to hour. Structure and current
+                concentrate the bait; the bait concentrates the bass.
+              </p>
+            </article>
+            <article>
+              <small>Where to start</small>
+              <h3>Rips, then beachfront, then structure</h3>
+              <ul>
+                <li><strong>Democrat Point:</strong> work the rip line and the edge of the outflow.</li>
+                <li><strong>Lighthouse beachfront:</strong> run the bars and look for birds over troughs.</li>
+                <li><strong>Fire Island Reef:</strong> drop on the structure when the beach is quiet.</li>
+                <li><strong>Gilgo:</strong> head west if the bait and the birds go west.</li>
+              </ul>
+            </article>
+            <article>
+              <small>What to watch</small>
+              <h3>Birds are the fish finder</h3>
+              <ul>
+                <li>Diving gannets in November usually mean bass underneath.</li>
+                <li>Terns and gulls picking at the surface means peanut bunker getting pushed up.</li>
+                <li>Water temperature in the 50s and low 60s is prime fall striper range.</li>
+                <li>Slicks, nervous water, and bait spray beat staring at empty ocean.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="chart-note">
+            Public references: Fire Island Inlet 40°37.8′ N / 73°16.4′ W, Democrat Point 40°38.0′ N /
+            73°17.6′ W, Fire Island Reef corners 40°35.600′ to 40°36.100′ N / 73°11.500′ to
+            73°13.500′ W (DEC). Confirm every number on the boat's chartplotter. This board is not a
+            navigation chart.
+          </p>
+        </section>
+      </section>
+
+      <section class="weather-section section-shell" id="weather">
+        <div class="section-heading wide">
+          <span>Conditions</span>
+          <h2>Wind, seas, tides</h2>
+        </div>
+
+        <div class="live-grid" id="liveGrid">
+          <article class="condition-card live-card">
+            <small>Ocean buoy + live model</small>
+            <h3 id="buoyHead">Loading buoy…</h3>
+            <ul class="metric-list" id="buoyMetrics"></ul>
+            <p class="card-note" id="buoyNote">
+              Observed at NDBC 44025, 30 nm south of Islip. Water temperature and bait decide more
+              than the model does.
+            </p>
+          </article>
+          <article class="condition-card live-card">
+            <small>Saturday Nov 7 | Fire Island Inlet</small>
+            <h3 id="day1Head">Loading live data…</h3>
+            <ul class="metric-list" id="day1Metrics"></ul>
+          </article>
+          <article class="condition-card live-card">
+            <small>Saturday Nov 7 | Fire Island Reef</small>
+            <h3 id="day2Head">Loading live data…</h3>
+            <ul class="metric-list" id="day2Metrics"></ul>
+          </article>
+          <article class="condition-card">
+            <small>Bite windows</small>
+            <h3>Sun and moon</h3>
+            <ul class="metric-list" id="sunMoonList">
+              <li>Loading sunrise and sunset…</li>
+            </ul>
+            <p class="card-note">
+              Short November day. First light and the tide change are the two windows that matter most.
+            </p>
+          </article>
+          <article class="condition-card">
+            <small>Fire Island Inlet tides</small>
+            <h3>NOAA station 8515228</h3>
+            <ul class="tide-list" id="tideList">
+              <li><strong>Nov 7</strong> Loading tide predictions…</li>
+            </ul>
+            <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8515228" target="_blank" rel="noreferrer">
+              NOAA tide station
+            </a>
+          </article>
+        </div>
+
+        <div class="forecast-links">
+          <a href="https://marine.weather.gov/MapClick.php?lat=40.60&lon=-73.25" target="_blank" rel="noreferrer">
+            NOAA point forecast
+          </a>
+          <a href="https://www.ndbc.noaa.gov/data/Forecasts/FZUS51.KOKX.html" target="_blank" rel="noreferrer">
+            NWS coastal waters
+          </a>
+          <a href="https://marine.rutgers.edu/cool/sat_data/?nothumbs=0&product=sst&region=bigbight" target="_blank" rel="noreferrer">
+            Rutgers SST charts
+          </a>
+          <a href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank" rel="noreferrer">
+            NDBC buoy 44025
+          </a>
+          <a href="https://www.windy.com/?sst,40.58,-73.25,9" target="_blank" rel="noreferrer">
+            Windy sea surface temp
+          </a>
+        </div>
+
+        <div class="windy-panel">
+          <div class="section-heading">
+            <span>Windy</span>
+            <h2>Live wind layer</h2>
+          </div>
+          <iframe
+            title="Windy wind forecast off Fire Island"
+            src="https://embed.windy.com/embed2.html?lat=40.58&lon=-73.25&detailLat=40.58&detailLon=-73.25&width=650&height=450&zoom=9&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=kt&metricTemp=%C2%B0F&radarRange=-1"
+          ></iframe>
+          <a class="windy-link" href="https://www.windy.com/?40.58,-73.25,9" target="_blank" rel="noreferrer">
+            Open this area in Windy
+          </a>
+        </div>
+      </section>
+
+      <section class="species-section section-shell" id="species">
+        <div class="section-heading wide">
+          <span>Know Your Target</span>
+          <h2>What might eat the jig</h2>
+        </div>
+
+        <article class="striper-primer">
+          <div class="striper-primer-copy">
+            <small>The main event</small>
+            <h3>Striped bass, <em>Morone saxatilis</em></h3>
+            <p>
+              Seven to eight black stripes running the length of a silver, brass-tinted side. Blunt
+              head, deep shoulders, two separate dorsal fins. East Coast anglers call them stripers,
+              rockfish, or linesiders, and the big ones get called cows.
+            </p>
+            <p>
+              They are anadromous: born in rivers like the Hudson and the Chesapeake, grown in the
+              ocean, and back to fresh water to spawn. That migration is the whole reason today
+              matters. Every November they pour out of Long Island Sound and down the south shore
+              heading for wintering grounds off Virginia and the Carolinas, and they feed hard the
+              entire way. A fish that ignored you in August will eat anything in front of it in November.
+            </p>
+            <p>
+              They are ambush predators that use current as a tool. They sit behind a bar, a rip, or a
+              reef edge and let the tide deliver sand eels, peanut bunker, mullet, herring, crabs, and
+              lobsters to them. That is why the inlet rips at Democrat Point and the bars along the
+              Lighthouse beachfront fish so well on a moving tide, and why slack water is usually a
+              coffee break.
+            </p>
+            <p>
+              A 28 to 31 inch keeper is roughly 8 to 12 pounds and 6 to 9 years old. A 40 inch fish is
+              usually over 20 years old and almost always a female. They can live past 30 years and
+              over 70 pounds. That age curve is exactly why the slot limit exists: the big breeders go
+              back in the water.
+            </p>
+          </div>
+          <div class="striper-primer-facts" role="group" aria-label="Striped bass quick facts">
+            <div>
+              <small>Keeper slot</small>
+              <strong>28 to under 31 in</strong>
+            </div>
+            <div>
+              <small>Limit</small>
+              <strong>1 per person, per day</strong>
+            </div>
+            <div>
+              <small>NY marine season</small>
+              <strong>Apr 15 - Dec 15</strong>
+            </div>
+            <div>
+              <small>Hooks with bait</small>
+              <strong>Inline circle, required</strong>
+            </div>
+            <div>
+              <small>Prime water temp</small>
+              <strong>50s to low 60s °F</strong>
+            </div>
+            <div>
+              <small>Best window</small>
+              <strong>Moving tide, low light</strong>
+            </div>
+          </div>
+        </article>
+
+        <div class="species-grid">
+          <article class="species-card striper">
+            <svg class="species-art" viewBox="0 0 320 150" role="img" aria-label="Striped bass illustration">
+              <path d="M18 78c36-42 108-54 170-42l34-22-6 36 28 24-30 22 8 34-36-24c-62 10-132-4-168-28Z" fill="#8fa6b8" stroke="#0a1d2e" stroke-width="3" stroke-linejoin="round" />
+              <path d="M40 66c40-22 96-28 146-20M38 76c42-16 100-20 150-14M40 86c44-10 102-12 152-8M44 96c44-4 100 0 148 4M52 106c42 2 94 8 138 14" stroke="#1c2b38" stroke-width="2.4" fill="none" opacity="0.75" />
+              <path d="M126 44c10 16 12 48 6 66" stroke="#0a1d2e" stroke-width="2" fill="none" opacity="0.35" />
+              <path d="M96 40c14-10 30-12 40-4-14 6-28 10-40 4Z" fill="#6f8798" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M150 38c16-8 30-6 38 2-14 4-28 6-38-2Z" fill="#6f8798" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M104 112c12 10 26 14 36 8-12-8-24-12-36-8Z" fill="#6f8798" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M44 62c10 8 12 26 4 34" stroke="#0a1d2e" stroke-width="2.6" fill="none" />
+              <circle cx="36" cy="70" r="5.4" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.4" />
+              <circle cx="35" cy="70" r="2.4" fill="#0a1d2e" />
+            </svg>
+            <span>Striped bass</span>
+            <h3>The reason we came</h3>
+            <ul>
+              <li><strong>ID:</strong> Seven to eight unbroken black stripes on a silver side, two separate dorsals, blunt head.</li>
+              <li><strong>Fight:</strong> Heavy head shakes and short powerful runs. They use current and their own weight. Keep the rod loaded.</li>
+              <li><strong>Eats:</strong> Diamond jigs, bucktails, soft plastics, live bunker or eels, and trolled tubes.</li>
+              <li><strong>Keep:</strong> 28 to under 31 inches, one per person. Inline circle hooks required when fishing bait.</li>
+              <li><strong>Release:</strong> Keep it in the water, wet hands, support the belly, no gills. A cow is worth more swimming.</li>
+            </ul>
+          </article>
+
+          <article class="species-card bluefish">
+            <svg class="species-art" viewBox="0 0 320 150" role="img" aria-label="Bluefish illustration">
+              <path d="M20 76c34-40 106-52 168-40l36-24-8 38 28 24-30 22 8 34-36-26c-62 10-130-6-166-28Z" fill="#6f93b4" stroke="#0a1d2e" stroke-width="3" stroke-linejoin="round" />
+              <path d="M58 54c40-10 92-10 134 0" stroke="#3f6b90" stroke-width="7" fill="none" opacity="0.5" />
+              <path d="M98 38c14-10 30-12 40-4-14 6-28 10-40 4Z" fill="#57789a" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M152 36c16-8 32-6 40 2-16 4-30 6-40-2Z" fill="#57789a" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M104 112c12 10 26 14 36 8-12-8-24-12-36-8Z" fill="#57789a" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M44 60c12 8 14 28 4 36" stroke="#0a1d2e" stroke-width="2.6" fill="none" />
+              <path d="M22 78c6-4 14-6 22-4-6 6-14 8-22 4Z" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.2" />
+              <path d="M26 74l4 4-4 4" stroke="#0a1d2e" stroke-width="1.8" fill="none" />
+              <circle cx="40" cy="68" r="5.4" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.4" />
+              <circle cx="39" cy="68" r="2.4" fill="#0a1d2e" />
+            </svg>
+            <span>Bluefish</span>
+            <h3>The chainsaw</h3>
+            <ul>
+              <li><strong>ID:</strong> Blue-green back, forked tail, and a mouth full of teeth that will find your fingers.</li>
+              <li><strong>Fight:</strong> Pound for pound meaner than the bass. Chaos on the surface, then they dig.</li>
+              <li><strong>Eats:</strong> Anything moving. Metal, poppers, chunks. Use a leader or lose the lure.</li>
+              <li><strong>Keep:</strong> No size limit, open all year. Five per person, seven aboard a licensed charter like the Patty Ann.</li>
+              <li><strong>Table:</strong> Great fresh off the boat on the grill, bad two days later. Bleed and ice it immediately.</li>
+            </ul>
+          </article>
+
+          <article class="species-card albie">
+            <svg class="species-art" viewBox="0 0 320 150" role="img" aria-label="False albacore illustration">
+              <path d="M24 76c36-38 104-48 162-36l40-26-10 40 30 22-32 22 10 34-40-26c-58 8-124-8-160-30Z" fill="#4d7f9c" stroke="#0a1d2e" stroke-width="3" stroke-linejoin="round" />
+              <path d="M120 44c18 6 34 16 46 28-16 6-34 4-50-4 4-8 6-16 4-24Z" fill="#2f5e78" stroke="#0a1d2e" stroke-width="2.4" stroke-linejoin="round" opacity="0.85" />
+              <path d="M150 50c14 4 26 12 34 20" stroke="#17384d" stroke-width="2.6" fill="none" />
+              <path d="M104 36c14-10 30-12 40-4-14 6-28 10-40 4Z" fill="#3a6b86" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M110 112c12 10 26 14 36 8-12-8-24-12-36-8Z" fill="#3a6b86" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <circle cx="62" cy="74" r="8" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.6" />
+              <circle cx="61" cy="74" r="3.6" fill="#0a1d2e" />
+              <path d="M26 78c8-6 18-8 28-6-8 8-18 10-28 6Z" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.2" />
+            </svg>
+            <span>False albacore</span>
+            <h3>The drag tester</h3>
+            <ul>
+              <li><strong>ID:</strong> Football body, wavy green markings on the back, no stripes on the belly. Not a real tuna, and not albacore.</li>
+              <li><strong>Fight:</strong> The fastest thing you will hook today. One long screaming run, then circles.</li>
+              <li><strong>Eats:</strong> Small metal and epoxy jigs retrieved fast through bait. They key on tiny baitfish.</li>
+              <li><strong>Keep:</strong> No size or bag limit in NY, but nobody eats them. Photo and release.</li>
+              <li><strong>Note:</strong> A late-season albie in the mix is a bonus, not the plan.</li>
+            </ul>
+          </article>
+
+          <article class="species-card blackfish">
+            <svg class="species-art" viewBox="0 0 320 150" role="img" aria-label="Blackfish tautog illustration">
+              <path d="M30 78c30-44 100-56 156-42l44-18-10 32 26 26-28 24 10 30-42-20c-56 12-126-8-156-32Z" fill="#4a4f58" stroke="#0a1d2e" stroke-width="3" stroke-linejoin="round" />
+              <path d="M110 44c22 0 44 6 62 18-18 10-40 14-62 10 4-10 4-20 0-28Z" fill="#33373e" stroke="#0a1d2e" stroke-width="2.4" stroke-linejoin="round" opacity="0.8" />
+              <path d="M96 36c16-8 34-8 44 2-16 6-32 8-44-2Z" fill="#3b4048" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M104 114c14 10 30 12 40 6-14-8-28-12-40-6Z" fill="#3b4048" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M34 66c10 10 12 28 2 36" stroke="#0a1d2e" stroke-width="2.6" fill="none" />
+              <path d="M30 80c8-4 16-4 22 0-7 5-15 5-22 0Z" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.2" />
+              <circle cx="48" cy="70" r="5.4" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.4" />
+              <circle cx="47" cy="70" r="2.4" fill="#0a1d2e" />
+            </svg>
+            <span>Blackfish (tautog)</span>
+            <h3>The structure thug</h3>
+            <ul>
+              <li><strong>ID:</strong> Mottled dark body, rubbery lips, human-looking teeth built for crushing crabs.</li>
+              <li><strong>Fight:</strong> Short, violent, and straight down into the rocks. Win the first three seconds or lose the fish.</li>
+              <li><strong>Eats:</strong> Green crabs and white crabs on the bottom, tight to structure.</li>
+              <li><strong>Keep:</strong> 16 inch minimum. NY Bight season Oct 15 to Dec 22, four fish per person.</li>
+              <li><strong>Table:</strong> One of the best eating fish in the Northeast. Worth the lost rigs.</li>
+            </ul>
+          </article>
+
+          <article class="species-card seabass">
+            <svg class="species-art" viewBox="0 0 320 150" role="img" aria-label="Black sea bass illustration">
+              <path d="M34 80c28-46 98-58 152-44l46-16-12 32 26 26-28 24 12 28-44-18c-54 12-124-8-152-32Z" fill="#3f4a5c" stroke="#0a1d2e" stroke-width="3" stroke-linejoin="round" />
+              <path d="M74 54c38-12 86-12 122 0" stroke="#8fa6b8" stroke-width="3" fill="none" opacity="0.5" />
+              <path d="M70 70c40-8 90-8 128 2M74 88c40-4 88-2 124 6" stroke="#8fa6b8" stroke-width="2.4" fill="none" opacity="0.4" />
+              <path d="M96 38c18-8 36-6 46 4-18 6-34 6-46-4Z" fill="#2f3848" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M218 20c10 4 14 12 12 20-6-6-10-12-12-20Z" fill="#2f3848" stroke="#0a1d2e" stroke-width="2.4" stroke-linejoin="round" />
+              <path d="M106 116c14 10 30 12 40 6-14-8-28-12-40-6Z" fill="#2f3848" stroke="#0a1d2e" stroke-width="2.6" stroke-linejoin="round" />
+              <path d="M38 68c10 10 12 28 2 36" stroke="#0a1d2e" stroke-width="2.6" fill="none" />
+              <circle cx="52" cy="72" r="5.8" fill="#f6fbff" stroke="#0a1d2e" stroke-width="2.4" />
+              <circle cx="51" cy="72" r="2.6" fill="#0a1d2e" />
+            </svg>
+            <span>Black sea bass</span>
+            <h3>The bycatch you want</h3>
+            <ul>
+              <li><strong>ID:</strong> Deep dusky body, pale speckled rows, and a tail filament on the big males.</li>
+              <li><strong>Fight:</strong> Honest bulldogging on the drop. Fun on light tackle over the reef.</li>
+              <li><strong>Eats:</strong> Clam, squid, and jigs worked on the bottom over structure.</li>
+              <li><strong>Keep:</strong> 16 inch minimum. Season Sept 1 to Dec 31, six fish per person.</li>
+              <li><strong>Table:</strong> Excellent. If the bass bite dies, the reef can still fill the cooler legally.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="gallery-section section-shell" id="gallery">
+        <div class="gallery-heading">
+          <div class="section-heading wide">
+            <span>After Action</span>
+            <h2>Trip gallery</h2>
+          </div>
+          <label class="primary-action photo-picker-action is-disabled" for="photoPicker" id="photoPickerAction" aria-disabled="true">
+            Add photos
+          </label>
+          <input class="visually-hidden" id="photoPicker" type="file" accept="image/*" multiple disabled />
+        </div>
+        <div class="photo-upload-panel" id="photoUploadPanel" hidden>
+          <div>
+            <strong id="photoSelectionSummary">No photos selected</strong>
+            <small>Photos are compressed before upload. Shared uploads require an internet connection.</small>
+          </div>
+          <label>
+            Caption for this batch <span>(optional)</span>
+            <input id="photoCaptionInput" type="text" maxlength="240" placeholder="First keeper of the day" />
+          </label>
+          <button class="primary-action" id="uploadPhotosButton" type="button">Upload photos</button>
+        </div>
+        <p class="photo-upload-status" id="photoUploadStatus" role="status" aria-live="polite"></p>
+        <div class="gallery-grid" id="sharedPhotoList"></div>
+      </section>
+
+      <section class="recap-section section-shell" id="rules">
+        <div class="section-heading wide">
+          <span>Scoreboard</span>
+          <h2>The recap writes itself</h2>
+        </div>
+        <div class="recap-grid">
+          <div class="score-card">
+            <small>Trip status</small>
+            <strong id="replacementGrade">Lines not in yet</strong>
+          </div>
+          <div class="score-card">
+            <small>This run</small>
+            <strong>All six aboard</strong>
+          </div>
+          <div class="score-card">
+            <small>Mission</small>
+            <strong>A big striper for Dad</strong>
+          </div>
+        </div>
+
+        <div class="required-banner">
+          <small>Required — every person aboard</small>
+          <strong>NY Recreational Marine Fishing Registry</strong>
+          <p>
+            Free but mandatory to fish New York marine waters. Two minutes online, or call
+            1-866-933-2257. Do it before lines in, not after the officer pulls alongside.
+          </p>
+          <a href="https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-marine-fishing-registry" target="_blank" rel="noreferrer">
+            Register now — dec.ny.gov
+          </a>
+        </div>
+
+        <div class="required-banner hms-banner">
+          <small>Striped bass rules, as of the May 12, 2026 DEC revision</small>
+          <strong>Slot 28 to under 31 in, one fish, inline circle hooks with bait</strong>
+          <p>
+            New York marine waters south of the George Washington Bridge: a striped bass is a keeper
+            only at 28 inches to under 31 inches, one per person per day, season April 15 to December
+            15. Non-offset inline circle hooks are required when fishing with any bait; they are not
+            required on artificial lures, even tipped ones. Measure tip of snout to squeezed tail.
+            Regulations can change at any time, so check DEC before lines in.
+          </p>
+          <a href="https://dec.ny.gov/things-to-do/saltwater-fishing/recreational-fishing-regulations" target="_blank" rel="noreferrer">
+            Check current DEC limits
+          </a>
+        </div>
+
+        <div class="required-banner hms-banner">
+          <small>Important if we run offshore</small>
+          <strong>No striped bass in federal waters</strong>
+          <p>
+            Striped bass may not be fished for, retained, or possessed in the federal EEZ, which
+            begins three nautical miles off the beach. Fire Island Reef sits inside that line, but the
+            boundary is roughly a mile south of the reef's southern edge. Capt. Greg is tracking this
+            on the chartplotter; it is his call, and it is a real federal rule, not a suggestion.
+          </p>
+          <a href="https://www.fisheries.noaa.gov/species/atlantic-striped-bass" target="_blank" rel="noreferrer">
+            NOAA Atlantic striped bass
+          </a>
+        </div>
+
+        <div class="checklist">
+          <h3>Before leaving Captree</h3>
+          <ul>
+            <li>Everyone registered with the NY Recreational Marine Fishing Registry.</li>
+            <li>Check NOAA coastal waters forecast, NDBC 44025, Windy, and the inlet conditions.</li>
+            <li>Confirm the tide stage for Fire Island Inlet with the captain.</li>
+            <li>Inline circle hooks on every bait rig. Measuring tape and a wet rag within reach.</li>
+            <li>November layers: base layer, fleece, windproof shell, warm hat, gloves.</li>
+            <li>Polarized glasses, sunscreen, deck shoes with grip.</li>
+            <li>Battery pack, dry bag, phone in something waterproof.</li>
+            <li>Water, real food, salty snacks. Cash for the mate.</li>
+            <li>Seasick meds the night before, not on the boat.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Built for the Nov 7 striper run of the Patty Ann, out of Captree.</span>
+      <a href="https://www.pattyannchartersny.com/" target="_blank" rel="noreferrer">Patty Ann Charters</a>
+    </footer>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="shared-config.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
