@@ -92,11 +92,12 @@ alter table public.trip_state
   check (
     active_destination in (
       -- Patty Ann, Nov 7 2026
+      'Jones Beach',
+      'Gilgo beachfront',
       'Fire Island Inlet',
       'Democrat Point',
       'Lighthouse beachfront',
       'Fire Island Reef',
-      'Gilgo beachfront',
       'Home',
       -- Ofishal Business, Aug 8 2026
       'Manasquan Inlet',
@@ -217,8 +218,8 @@ insert into public.trip_state (trip_id, status, active_destination, return_note,
 values (
   'a7770000-0000-4000-8000-000000000001',
   'underway',
-  'Democrat Point',
-  'Back at Captree, exact time TBD',
+  'Gilgo beachfront',
+  'Passed Jones Beach about half a mile off the sand, still cruising east.',
   '2026-11-07T05:00:00Z'
 )
 on conflict (trip_id) do nothing;
@@ -244,7 +245,7 @@ values
     'Boat life',
     'Running',
     null,
-    'Out Fire Island Inlet, work the Democrat Point rips, then the Lighthouse beachfront and Fire Island Reef. Fall run, so the bait decides.',
+    'Out Fire Island Inlet and west along the ocean beachfront. Fall run, so the bait decides where we stop.',
     '2026-11-07T05:01:00Z',
     '2026-11-07T05:01:00Z'
   ),
@@ -258,5 +259,16 @@ values
     'Striped bass: 28 to under 31 inch slot, one fish per person, inline circle hooks when fishing bait. Everything else goes back.',
     '2026-11-07T05:02:00Z',
     '2026-11-07T05:02:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000104',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 7:30 AM',
+    'Mark',
+    'Running',
+    null,
+    'Passed Jones Beach about half a mile off the sand, still cruising east. Working the beachfront back toward Gilgo and the inlet.',
+    '2026-11-07T05:03:00Z',
+    '2026-11-07T05:03:00Z'
   )
 on conflict (id) do nothing;

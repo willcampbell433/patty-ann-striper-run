@@ -48,17 +48,18 @@ test("departure precedes the end of the trip day", () => {
   );
 });
 
-test("every waypoint sits in the ocean off Fire Island, not somewhere else", () => {
+test("every waypoint sits on the south shore run, not somewhere else", () => {
   for (const [key, point] of Object.entries(POINTS)) {
     assert.equal(point.key, key, `${key} should carry its own key`);
     assert.ok(point.label && point.note, `${key} needs a label and a chart note`);
     assert.ok(
       point.lat > 40.5 && point.lat < 40.75,
-      `${key} latitude ${point.lat} is outside the Fire Island area`,
+      `${key} latitude ${point.lat} is outside the south shore beachfront run`,
     );
+    // West bound reaches Jones Beach, east bound reaches the Fire Island Lighthouse.
     assert.ok(
-      point.lon > -73.45 && point.lon < -73.15,
-      `${key} longitude ${point.lon} is outside the Fire Island area`,
+      point.lon > -73.56 && point.lon < -73.15,
+      `${key} longitude ${point.lon} is outside the south shore beachfront run`,
     );
   }
 });

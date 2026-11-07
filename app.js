@@ -54,13 +54,19 @@ const seedEntries = [
     time: "Nov 7, plan",
     type: "Boat life",
     method: "Running",
-    moment: "Out Fire Island Inlet, work the Democrat Point rips, then the Lighthouse beachfront and Fire Island Reef. Fall run, so the bait decides.",
+    moment: "Out Fire Island Inlet and west along the ocean beachfront. Fall run, so the bait decides where we stop.",
   },
   {
     time: "Nov 7, before lines in",
     type: "Boat life",
     method: "Other",
     moment: "Striped bass: 28 to under 31 inch slot, one fish per person, inline circle hooks when fishing bait. Everything else goes back.",
+  },
+  {
+    time: "Nov 7, 7:30 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Passed Jones Beach about half a mile off the sand, still cruising east. Working the beachfront back toward Gilgo and the inlet.",
   },
 ];
 
@@ -341,8 +347,7 @@ function initMap() {
   });
 
   const latLngs = route.map((p) => [p.lat, p.lon]);
-  const gilgo = POINTS.gilgoBeachfront;
-  const allLatLngs = [...latLngs, [gilgo.lat, gilgo.lon]];
+  const allLatLngs = latLngs;
 
   L.polyline(latLngs, {
     color: "#ff8d4d",
@@ -370,18 +375,6 @@ function initMap() {
       marker.bindTooltip("Fire Island Inlet", { permanent: true, direction: "right", offset: [10, 0] });
     }
   });
-
-  // Gilgo is the westward backup plan, so it is pinned but not on the planned line.
-  L.circleMarker([gilgo.lat, gilgo.lon], {
-    radius: 6,
-    color: "#04111d",
-    weight: 3,
-    fillColor: "#9fb5c7",
-    fillOpacity: 1,
-    dashArray: "2 4",
-  })
-    .addTo(map)
-    .bindPopup(`<strong>${gilgo.label}</strong><br>${gilgo.note}`);
 
   map.fitBounds(allLatLngs, { padding: [36, 36] });
 

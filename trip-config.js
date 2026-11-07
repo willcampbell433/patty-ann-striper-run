@@ -79,12 +79,19 @@ export const POINTS = {
     label: "Fire Island Reef",
     note: "DEC artificial reef, 62 to 73 feet, 744 acres, 2.0 nm south of the Fire Island Lighthouse. Structure for bass, blackfish, and sea bass.",
   },
+  jonesBeach: {
+    key: "jonesBeach",
+    lat: 40.58,
+    lon: -73.524,
+    label: "Jones Beach",
+    note: "West end of the beachfront run, about half a mile off the sand. Passed eastbound at 7:30 AM.",
+  },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
     lat: 40.612,
     lon: -73.38,
     label: "Gilgo beachfront",
-    note: "Ocean side west of the inlet. The run-and-gun option when the bait pushes west.",
+    note: "Ocean side between Jones Beach and the inlet. Prime run-and-gun water when the bait pushes west.",
   },
   home: {
     key: "home",
@@ -95,10 +102,16 @@ export const POINTS = {
   },
 };
 
-/** Drawn as the planned line on the chart, in order. */
+/**
+ * The day's working track, in order, drawn as the line on the chart.
+ * Updated 7:30 AM: the boat ran west out of the inlet to Jones Beach and is
+ * working the beachfront back east, so the westward leg is now part of the run.
+ */
 export const ROUTE_KEYS = [
   "captree",
   "fireIslandInlet",
+  "jonesBeach",
+  "gilgoBeachfront",
   "democratPoint",
   "lighthouseBeach",
   "fireIslandReef",
@@ -109,15 +122,17 @@ export const ROUTE_KEYS = [
  * trip_state.active_destination check constraint in the migration.
  */
 export const DESTINATION_LABELS = [
+  "Jones Beach",
+  "Gilgo beachfront",
   "Fire Island Inlet",
   "Democrat Point",
   "Lighthouse beachfront",
   "Fire Island Reef",
-  "Gilgo beachfront",
   "Home",
 ];
 
-export const DEFAULT_DESTINATION = "Democrat Point";
+// Next spot east of the 7:30 AM Jones Beach position.
+export const DEFAULT_DESTINATION = "Gilgo beachfront";
 
 /** Live data sources. */
 export const SOURCES = {
