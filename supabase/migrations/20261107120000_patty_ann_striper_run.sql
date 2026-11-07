@@ -221,7 +221,7 @@ values (
   'a7770000-0000-4000-8000-000000000001',
   'fishing',
   'Home',
-  'Six bass outside Democrat Point. Dennis 3, Bruce 2, Jon 1. Two inside the slot, four too big.',
+  'Nine bass by 11:45 and every man on the board. Dennis 3, Bruce 2, Will 1, Tom 1, Jon 1, Don 1. Three inside the slot, six too big. Still hitting it.',
   '2026-11-07T05:00:00Z'
 )
 on conflict (trip_id) do nothing;
@@ -426,5 +426,49 @@ values
     'Cameras out for this one. Finally some fish worth photographing.',
     '2026-11-07T05:17:00Z',
     '2026-11-07T05:17:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000113',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:45 AM',
+    'Mark',
+    'Trolling',
+    null,
+    'Pulled over the same spot a couple more times and it kept producing. The spoons were absolutely hitting. Three more bass, and that puts every single guy on the boat on the board.',
+    '2026-11-07T05:18:00Z',
+    '2026-11-07T05:18:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000114',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:45 AM',
+    'Striped bass',
+    'Trolling',
+    'Will',
+    'Will finally gets his, on the last pass. Over the slot, so it goes back. (33")',
+    '2026-11-07T05:19:00Z',
+    '2026-11-07T05:19:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000115',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:45 AM',
+    'Striped bass',
+    'Trolling',
+    'Tom',
+    'Tom hooks a cow, the biggest of the day so far. Well over the slot and released. (36 to 37")',
+    '2026-11-07T05:20:00Z',
+    '2026-11-07T05:20:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000116',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:45 AM',
+    'Striped bass',
+    'Trolling',
+    'Don',
+    'Don puts the last man on the board. Nine bass aboard and nobody skunked.',
+    '2026-11-07T05:21:00Z',
+    '2026-11-07T05:21:00Z'
   )
 on conflict (id) do nothing;

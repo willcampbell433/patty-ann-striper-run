@@ -111,7 +111,7 @@ export const POINTS = {
     lat: 40.6225,
     lon: -73.295,
     label: "Outside Democrat Point",
-    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. The next run through was massive: four more bass, for a boat total of six. Two of the six were inside the slot, the rest too big.",
+    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. Then it broke wide open: the boat pulled the same line over and over on trolled spoons and had nine bass aboard by 11:45, with every man on the board. Three of the nine were inside the slot and the rest were too big to keep.",
   },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
@@ -136,8 +136,9 @@ export const POINTS = {
  * Point at 6:30, then down the ocean beachfront past Gilgo and Jones Beach to
  * Jones Inlet at 7:38 and Long Beach by 8:20. Turned around at 8:52, ran the
  * whole way back east, and set up just outside Democrat Point, where the fleet
- * was. That is where the fish were: two stripers between 11:00 and 11:20, then
- * four more on the next run through. Six bass total, two inside the slot.
+ * was. That is where the fish were. Two stripers between 11:00 and 11:20, then
+ * run after run over the same line on trolled spoons: nine bass aboard by 11:45,
+ * every man on the board, three of them inside the slot.
  *
  * The Lighthouse beachfront and Fire Island Reef sit east of the inlet and were
  * not part of today's run. They stay pinned as references, not on the track.
@@ -312,6 +313,33 @@ export const SEED_ENTRIES = [
     type: "Boat life",
     method: "Other",
     moment: "Cameras out for this one. Finally some fish worth photographing.",
+  },
+  {
+    time: "Nov 7, 11:45 AM",
+    type: "Mark",
+    method: "Trolling",
+    moment: "Pulled over the same spot a couple more times and it kept producing. The spoons were absolutely hitting. Three more bass, and that puts every single guy on the boat on the board.",
+  },
+  {
+    time: "Nov 7, 11:45 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Will",
+    moment: "Will finally gets his, on the last pass. Over the slot, so it goes back. (33\")",
+  },
+  {
+    time: "Nov 7, 11:45 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Tom",
+    moment: "Tom hooks a cow, the biggest of the day so far. Well over the slot and released. (36 to 37\")",
+  },
+  {
+    time: "Nov 7, 11:45 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Don",
+    moment: "Don puts the last man on the board. Nine bass aboard and nobody skunked.",
   },
 ];
 
