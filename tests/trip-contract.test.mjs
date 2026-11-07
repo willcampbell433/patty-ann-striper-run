@@ -36,6 +36,13 @@ test("the charter's fixed dock times are set and ordered", () => {
 test("the board is closed out: no live tracker, no new entries", async () => {
   const [html, app] = await Promise.all([read("index.html"), read("app.js")]);
 
+  // Every nav link must point at a section that still exists.
+  const navIds = [...html.matchAll(/<a href="#([a-z-]+)">/g)].map((m) => m[1]);
+  assert.ok(navIds.length > 3, "expected the primary nav links");
+  navIds.forEach((id) => {
+    assert.ok(html.includes(`id="${id}"`), `nav links to #${id}, which is not on the page`);
+  });
+
   // The trip is over. Anything that asked the reader for live input is gone.
   for (const id of ["tripUpdateForm", "destinationControl", "locateButton", "homeReadout", "etaReadout"]) {
     assert.ok(!html.includes(`id="${id}"`), `${id} is live-trip furniture and should be off the recap page`);
