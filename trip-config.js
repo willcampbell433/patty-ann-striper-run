@@ -39,7 +39,7 @@ export const TRIP = {
 export const CREW = [
   { name: "Bruce", role: "Trip organizer", note: "Will's dad. Put the whole thing together, booked the boat, and wrote the briefing. Chief morale officer." },
   { name: "Will", role: "Trip Log / Photos", note: "Bruce's son and the tech guy of the outfit. Helped his dad organize the trip, shot the photos, and built this page." },
-  { name: "Tom", role: "Deck", note: "Played lacrosse with Bruce back in the day. Has his own boat, so he knows exactly where the fish aren't." },
+  { name: "Tom", role: "Deck", note: "Played lacrosse with Bruce back in the day. Has his own boat, so he knows exactly where the fish aren't. Slept through this entire trip and still caught the biggest fish on it." },
   { name: "Dennis", role: "Mr. Excitement", note: "Lifelong fisherman, now a Hobie fishing kayak guy. Also tutored Will for the SATs, so he has already made him suffer once. Caught the first striped bass of his life today and then went high hook with three. The nickname earned itself." },
   { name: "Jon", role: "Deck", note: "Another one from the old lacrosse crew. Made the trip down from the North Shore." },
   { name: "Don", role: "Deck", note: "Long Island Vice. Grew up a few houses from Bruce and has been his friend ever since. Fisherman and pickleball menace." },
@@ -235,6 +235,12 @@ export const SEED_ENTRIES = [
     moment: "First drop of the day off Democrat Point. Birds diving over the rips but nothing underneath them. Pulled up after 15 minutes and ran the beachfront west.",
   },
   {
+    time: "Nov 7, 6:45 AM",
+    type: "Boat life",
+    method: "Other",
+    moment: "Tom goes down early. Feeling the seas before lines were even wet, so he found a spot in the cabin and slept. Five hours, straight through the whole westbound grind.",
+  },
+  {
     time: "Nov 7, 7:30 AM",
     type: "Mark",
     method: "Running",
@@ -342,7 +348,7 @@ export const SEED_ENTRIES = [
     type: "Striped bass",
     method: "Trolling",
     angler: "Tom",
-    moment: "Tom hooks a cow, the biggest of the day so far. Well over the slot and released. (36 to 37\")",
+    moment: "Tom wakes up, picks up a rod, and hooks a cow almost immediately. Biggest fish of the day, well over the slot, released. Five hours asleep and he did not miss a thing, because every fish came in the last forty-five minutes. (36 to 37\")",
   },
   {
     time: "Nov 7, 11:45 AM",

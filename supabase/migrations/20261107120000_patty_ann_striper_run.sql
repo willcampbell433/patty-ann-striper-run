@@ -274,6 +274,17 @@ values
     '2026-11-07T05:03:00Z'
   ),
   (
+    'a7770000-0000-4000-8000-00000000011c',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 6:45 AM',
+    'Boat life',
+    'Other',
+    null,
+    'Tom goes down early. Feeling the seas before lines were even wet, so he found a spot in the cabin and slept. Five hours, straight through the whole westbound grind.',
+    '2026-11-07T05:03:30Z',
+    '2026-11-07T05:03:30Z'
+  ),
+  (
     'a7770000-0000-4000-8000-000000000105',
     'a7770000-0000-4000-8000-000000000001',
     'Nov 7, 7:30 AM',
@@ -456,7 +467,7 @@ values
     'Striped bass',
     'Trolling',
     'Tom',
-    'Tom hooks a cow, the biggest of the day so far. Well over the slot and released. (36 to 37")',
+    'Tom wakes up, picks up a rod, and hooks a cow almost immediately. Biggest fish of the day, well over the slot, released. Five hours asleep and he did not miss a thing, because every fish came in the last forty-five minutes. (36 to 37")',
     '2026-11-07T05:20:00Z',
     '2026-11-07T05:20:00Z'
   ),
