@@ -262,7 +262,7 @@ export const SEED_ENTRIES = [
     time: "Nov 7, 8:52 AM",
     type: "Mark",
     method: "Running",
-    moment: "Turned around and running back east, on word of mouth. Pete, a friend of Bruce's fishing his own center console Robalo, had been texting him at Long Beach to say the fish were where he was. Greg was getting the same thing by phone from his own buddies: the bass are back east, outside Fire Island Inlet. The whole fleet hurried back there at once.",
+    moment: "Turned around and running back east, on word of mouth. Pete, Don's cousin, out in his own center console Robalo, had been texting Bruce at Long Beach to say the fish were where he was. Greg was getting the same thing by phone from his own buddies: the bass are back east, outside Fire Island Inlet. The whole fleet hurried back there at once. Bruce and Don fish with Pete, who goes by Louie, often enough that the standing joke is he outfishes the two of them combined. He was right again.",
   },
   {
     time: "Nov 7, back east",
