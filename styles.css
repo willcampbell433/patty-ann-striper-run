@@ -1211,6 +1211,9 @@ small {
   display: block;
   width: calc(100% + 44px);
   margin: -22px -22px 0;
+  /* The img tags carry width/height for layout stability, which would otherwise
+     render at full intrinsic height and blow the cards out. */
+  height: auto;
   aspect-ratio: 5 / 3;
   object-fit: contain;
   padding: 12px;
