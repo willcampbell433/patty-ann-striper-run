@@ -102,6 +102,26 @@ const seedEntries = [
     method: "Running",
     moment: "Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.",
   },
+  {
+    time: "Nov 7, back east",
+    type: "Mark",
+    method: "Running",
+    moment: "Ran the whole way back east and set up just outside Democrat Point, ocean side of the inlet. Boats everywhere. Found where everyone is.",
+  },
+  {
+    time: "Nov 7, 11:00 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Bruce",
+    moment: "First fish in the boat. Bruce on the bunker spoon, and it measured right inside the slot. (30\")",
+  },
+  {
+    time: "Nov 7, 11:20 AM",
+    type: "Striped bass",
+    method: "Trolling",
+    angler: "Dennis",
+    moment: "Dennis on the board twenty minutes later, and it is the first striped bass of his life. Too big for the slot so it went back, but it fought him the whole way. (36\")",
+  },
 ];
 
 const tideFallback = SOURCES.tideFallback;

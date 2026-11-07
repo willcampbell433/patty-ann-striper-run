@@ -219,9 +219,9 @@ on conflict (id) do nothing;
 insert into public.trip_state (trip_id, status, active_destination, return_note, updated_at)
 values (
   'a7770000-0000-4000-8000-000000000001',
-  'underway',
-  'Jones Inlet',
-  'Off Jones Inlet at 7:38 AM, still running west.',
+  'fishing',
+  'Home',
+  'Two stripers outside Democrat Point: Bruce 30" in the slot at 11:00 AM, Dennis 36" released at 11:20 AM.',
   '2026-11-07T05:00:00Z'
 )
 on conflict (trip_id) do nothing;
@@ -236,7 +236,7 @@ values
     'Boat life',
     'Dockside',
     null,
-    'Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, John, and Donald. Capt. Greg running it, AJ on the deck.',
+    'Six aboard the Patty Ann at Captree: Bruce, Will, Tom, Dennis, Jon, and Don. Capt. Greg running it, AJ on the deck.',
     '2026-11-07T05:00:00Z',
     '2026-11-07T05:00:00Z'
   ),
@@ -294,5 +294,71 @@ values
     'Off Jones Inlet between Point Lookout and the Jones Beach west end, still running west. About 15 nm from Captree with an 11:00 AM return.',
     '2026-11-07T05:05:00Z',
     '2026-11-07T05:05:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000107',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, ~8:20 AM',
+    'Mark',
+    'Jigging',
+    null,
+    'Second stop, off Long Beach. Rods down 20 to 30 minutes with no hits on the jigs, but the bunker were thick and we snagged five or six live ones.',
+    '2026-11-07T05:06:00Z',
+    '2026-11-07T05:06:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000108',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, ~8:40 AM',
+    'Boat life',
+    'Live bait',
+    null,
+    'Three live bunker in the water. Couple of dogfish bites and nothing else, so the bass are not under this bait.',
+    '2026-11-07T05:07:00Z',
+    '2026-11-07T05:07:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000109',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 8:52 AM',
+    'Mark',
+    'Running',
+    null,
+    'Turned around and running back east. Greg says a buddy of his put fish together back where we started, so we are retracing the morning with live bunker aboard.',
+    '2026-11-07T05:08:00Z',
+    '2026-11-07T05:08:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000010a',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, back east',
+    'Mark',
+    'Running',
+    null,
+    'Ran the whole way back east and set up just outside Democrat Point, ocean side of the inlet. Boats everywhere. Found where everyone is.',
+    '2026-11-07T05:09:00Z',
+    '2026-11-07T05:09:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000010b',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:00 AM',
+    'Striped bass',
+    'Trolling',
+    'Bruce',
+    'First fish in the boat. Bruce on the bunker spoon, and it measured right inside the slot. (30")',
+    '2026-11-07T05:10:00Z',
+    '2026-11-07T05:10:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-00000000010c',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:20 AM',
+    'Striped bass',
+    'Trolling',
+    'Dennis',
+    'Dennis on the board twenty minutes later, and it is the first striped bass of his life. Too big for the slot so it went back, but it fought him the whole way. (36")',
+    '2026-11-07T05:11:00Z',
+    '2026-11-07T05:11:00Z'
   )
 on conflict (id) do nothing;
