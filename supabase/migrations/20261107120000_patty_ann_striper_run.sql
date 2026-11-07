@@ -470,5 +470,27 @@ values
     'Don puts the last man on the board. Nine bass aboard and nobody skunked.',
     '2026-11-07T05:21:00Z',
     '2026-11-07T05:21:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000117',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:55 AM',
+    'Mark',
+    'Running',
+    null,
+    'Called it at 11:55. Last pictures taken, lines in, and the Patty Ann is headed back through the inlet. If Greg sees anything on the way home he will stop on it, but the day is done. Three keepers in the box, all inside the slot, and every man aboard caught a fish.',
+    '2026-11-07T05:22:00Z',
+    '2026-11-07T05:22:00Z'
+  ),
+  (
+    'a7770000-0000-4000-8000-000000000118',
+    'a7770000-0000-4000-8000-000000000001',
+    'Nov 7, 11:55 AM',
+    'Boat life',
+    'Other',
+    null,
+    'Hats off to Greg and AJ for sticking it out. They had no afternoon trip, kept working almost an hour past the booked dock time, and stayed on the fish right to the end. Nobody is complaining.',
+    '2026-11-07T05:23:00Z',
+    '2026-11-07T05:23:00Z'
   )
 on conflict (id) do nothing;

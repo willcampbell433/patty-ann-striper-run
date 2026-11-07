@@ -111,7 +111,7 @@ export const POINTS = {
     lat: 40.6225,
     lon: -73.295,
     label: "Outside Democrat Point",
-    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. Then it broke wide open: the boat pulled the same line over and over on trolled spoons and had nine bass aboard by 11:45, with every man on the board. Three of the nine were inside the slot and the rest were too big to keep.",
+    note: "Third stop, and the one that produced all of it. Ran the whole way back east and set up on the ocean side just outside the inlet, where the rest of the fleet was already working. Bruce put the first fish in the boat at 11:00 AM on a bunker spoon, 30 inches and inside the slot. Dennis followed at 11:20 with a 36 incher, over the slot and released. Then it broke wide open: the boat pulled the same line over and over on trolled spoons and had nine bass aboard by 11:45, with every man on the board. Three of the nine were inside the slot and went in the box; the other six were too big to keep. Lines in at 11:55 and headed home.",
   },
   gilgoBeachfront: {
     key: "gilgoBeachfront",
@@ -138,7 +138,8 @@ export const POINTS = {
  * whole way back east, and set up just outside Democrat Point, where the fleet
  * was. That is where the fish were. Two stripers between 11:00 and 11:20, then
  * run after run over the same line on trolled spoons: nine bass aboard by 11:45,
- * every man on the board, three of them inside the slot.
+ * every man on the board, three of them inside the slot and in the box. Called it
+ * at 11:55 and ran home through the inlet.
  *
  * The Lighthouse beachfront and Fire Island Reef sit east of the inlet and were
  * not part of today's run. They stay pinned as references, not on the track.
@@ -340,6 +341,18 @@ export const SEED_ENTRIES = [
     method: "Trolling",
     angler: "Don",
     moment: "Don puts the last man on the board. Nine bass aboard and nobody skunked.",
+  },
+  {
+    time: "Nov 7, 11:55 AM",
+    type: "Mark",
+    method: "Running",
+    moment: "Called it at 11:55. Last pictures taken, lines in, and the Patty Ann is headed back through the inlet. If Greg sees anything on the way home he will stop on it, but the day is done. Three keepers in the box, all inside the slot, and every man aboard caught a fish.",
+  },
+  {
+    time: "Nov 7, 11:55 AM",
+    type: "Boat life",
+    method: "Other",
+    moment: "Hats off to Greg and AJ for sticking it out. They had no afternoon trip, kept working almost an hour past the booked dock time, and stayed on the fish right to the end. Nobody is complaining.",
   },
 ];
 
