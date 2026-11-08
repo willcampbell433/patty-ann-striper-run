@@ -18,7 +18,7 @@ Every photo of the trip itself is in the gallery.
 
 | File | Dish | Source | Author | License |
 | --- | --- | --- | --- | --- |
-| `classic-fried.jpg` | Breaded pan-fried fish | [Commons](https://commons.wikimedia.org/wiki/File:Backfisch-St%C3%A4bchen_1.jpg) | IgorCalzone1 | CC BY-SA 4.0 |
+| `classic-fried.jpg` | Breaded pan-fried fish | Supplied by Will | Will Campbell | Provided for use on this site |
 | `ceviche.jpg` | Ceviche | [Commons](https://commons.wikimedia.org/wiki/File:Ceviche_del_Per%C3%BA.jpg) | Wikimedia Commons contributor (no machine-readable author) | CC BY 3.0 |
 | `bass-cakes.jpg` | Fish cakes | [Commons](https://commons.wikimedia.org/wiki/File:Fish_Cakes_Mussel_Inn_Glasgow.JPG) | Benreis | CC BY 3.0 |
 | `tacos.jpg` | Fish tacos with cabbage | [Commons](https://commons.wikimedia.org/wiki/File:Fish_tacos_food_cabbage_tortillas.jpg) | Jon Sullivan | Public domain |
